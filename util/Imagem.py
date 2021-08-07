@@ -1,4 +1,4 @@
-import tkinter as tk
+from tkinter import *
 from PIL import Image, ImageTk
 
 class Imagem:
@@ -95,11 +95,14 @@ class Imagem:
     def salvar(self,path,tipo):
         self.__img.save(path,tipo)
 
-    def mostrar(self,titulo=''):
-        root = tk.Tk()
-        root.title(titulo)
-        photo = ImageTk.PhotoImage(self.__img)
-        label = tk.Label(root, image=photo)
-        label.image = photo
-        label.grid(row=2, column=0) #Start the program
-        root.mainloop() 
+    def mostrar(self, janela, titulo=''):
+        #root = janela
+        #root.title(titulo)
+        #photo = ImageTk.PhotoImage(self.__img)
+        #label = tk.Label(root, image=photo)
+        #label.image = photo
+        #fotofundo
+        back = Label(janela)
+        back.la = ImageTk.PhotoImage(self.__img)
+        back['image'] = back.la
+        back.place(x=0,y=0)
