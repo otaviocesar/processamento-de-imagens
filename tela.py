@@ -153,6 +153,13 @@ class Application:
         self.b20["command"] = self.gradiente
         self.b20.pack ()
 
+        self.b21 = Button(self.widget1)
+        self.b21["text"] = "Smoothing"
+        self.b21["font"] = ("Calibri", "9")
+        self.b21["width"] = 55
+        self.b21["command"] = self.smoothing
+        self.b21.pack ()
+
 
     def carregar(self):
         if self.msg["text"] == "Imagem":
@@ -878,9 +885,14 @@ class Application:
                         1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
             img = Imagem()
             img.carregar('img/lennaRGB.jpg')
+            img.toGray()
             return self.dilatacaoMon3(self.erosaoMon2(img, mat), mat)
         else:
             self.msg["text"] = "Imagem"
+
+    def aberturaMon2(self,  img: Imagem, mat):
+        img.toGray()
+        return self.dilatacaoMon3(self.erosaoMon2(img, mat), mat)
 
     def fechamentoMon(self):
         if self.msg["text"] == "Imagem":
@@ -893,6 +905,10 @@ class Application:
         else:
             self.msg["text"] = "Imagem"
 
+    def fechamentoMon2(self,  img: Imagem, mat):
+        img.toGray()
+        return self.erosaoMon3(self.dilatacaoMon2(img, mat), mat, True)
+
     def gradiente(self):
         if self.msg["text"] == "Imagem":
             mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
@@ -904,6 +920,17 @@ class Application:
             imagem.criarComMatriz(self.subtracaoMon2(
                 self.dilatacaoMon2(img, mat), self.erosaoMon2(img, mat)))
             return imagem.mostrar(janela, 'Gradiente')
+        else:
+            self.msg["text"] = "Imagem"
+
+    def smoothing(self):
+        if self.msg["text"] == "Imagem":
+            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+                        1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
+            img = Imagem()
+            img.carregar('img/lennaRGB.jpg')
+            img.toGray()
+            return self.aberturaMon2(self.fechamentoMon2(img, mat), mat) 
         else:
             self.msg["text"] = "Imagem"
 
