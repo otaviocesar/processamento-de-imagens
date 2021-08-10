@@ -24,24 +24,48 @@ class Imagem:
         else:
             self.__img=Image.new(tipo, (largura, altura ), (0))
 
-    def criarComMatriz(self,mat):
+    def criarComMatriz(self, mat):
         nCanais = len(mat)
         altura = len(mat[0])
         largura = len(mat[0][0])
-        if(nCanais==3):
-            self.criarVazia(self.MODE_RGB(),altura,largura)
-            cor=[]
-            for y in range(0,altura):
-                for x in range(0,largura):
-                    for c in range(0,nCanais):
-                        cor.append(mat[c][y][x])
-                    self.__img.putpixel((x,y),tuple(cor))
-                    cor.clear()
+
+        if (nCanais == 3):
+            self.criarVazia(self.MODE_RGB(), altura, largura)
+            color = []
+            for y in range(0, altura):
+                for x in range(0, largura):
+                    for c in range(0, nCanais):
+                        color.append(int(mat[c][y][x]))
+                    self.__img.putpixel((x, y), tuple(color))
+                    color.clear()
+
         else:
-            self.criarVazia(self.MODE_GRAY(),altura,largura)
-            for y in range(0,altura):
-                for x in range(0,largura):
-                    self.__img.putpixel((x,y),mat[0][y][x])
+            self.criarVazia(self.MODE_GRAY(), altura, largura)
+            for y in range(altura):
+                for x in range(largura):
+                    self.__img.putpixel((x, y), int(mat[0][y][x]))
+
+    def _criarComMatriz(self, mat):
+        nCanais = len(mat)
+        altura = len(mat[0])
+        largura = len(mat[0][0])
+
+        if (nCanais == 3):
+            self.criarVazia(self.MODE_RGB(), altura, largura)
+            color = []
+            for y in range(0, altura):
+                for x in range(0, largura):
+                    for c in range(0, nCanais):
+                        color.append(mat[c][y][x])
+                    self.__img.putpixel((x, y), tuple(color))
+                    color.clear()
+
+        else:
+            self.criarVazia(self.MODE_GRAY(), altura, largura)
+            for y in range(altura):
+                for x in range(largura):
+                    self.__img.putpixel((x-1, y-1), int(mat[0][y][x]))
+
                     
     def toGray(self):
         self.__img=self.__img.convert(self.MODE_GRAY())
@@ -80,7 +104,6 @@ class Imagem:
         if nCanais==3:
             for y in range(0,altura):
                 for x in range(0,largura):
-                    # cor=self.__img.getpixel((x,y))
                     cor=vetImg[x,y]
                     for c in range(0,nCanais):
                         mat[c][y][x]=cor[c]
@@ -96,13 +119,7 @@ class Imagem:
         self.__img.save(path,tipo)
 
     def mostrar(self, janela, titulo=''):
-        #root = janela
-        #root.title(titulo)
-        #photo = ImageTk.PhotoImage(self.__img)
-        #label = tk.Label(root, image=photo)
-        #label.image = photo
-        #fotofundo
-        back = Label(janela)
-        back.la = ImageTk.PhotoImage(self.__img)
-        back['image'] = back.la
-        back.place(x=0,y=0)
+        imagem = Label(janela)
+        imagem.la = ImageTk.PhotoImage(self.__img)
+        imagem['image'] = imagem.la
+        imagem.place(x=0,y=0)
