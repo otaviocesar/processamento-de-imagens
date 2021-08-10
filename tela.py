@@ -6,7 +6,7 @@ from random import random, randrange
 class Application:
     def __init__(self, master=None):
         janela.title("Janela")
-        janela.geometry('800x400')
+        janela.geometry('800x600')
         self.widget1 = Frame(master)
         self.widget1.pack()
         self.msg = Label(self.widget1, text="Imagem")
@@ -117,6 +117,42 @@ class Application:
         self.b15["width"] = 55
         self.b15["command"] = self.bordaExterna
         self.b15.pack ()
+
+        self.b16 = Button(self.widget1)
+        self.b16["text"] = "Erosão - Morfologia matemática monocromática"
+        self.b16["font"] = ("Calibri", "9")
+        self.b16["width"] = 55
+        self.b16["command"] = self.erosaoMon
+        self.b16.pack ()
+
+        self.b17 = Button(self.widget1)
+        self.b17["text"] = "Dilatação - Morfologia matemática monocromática"
+        self.b17["font"] = ("Calibri", "9")
+        self.b17["width"] = 55
+        self.b17["command"] = self.dilatacaoMon
+        self.b17.pack ()
+
+        self.b18 = Button(self.widget1)
+        self.b18["text"] = "Abertura - Morfologia matemática monocromática"
+        self.b18["font"] = ("Calibri", "9")
+        self.b18["width"] = 55
+        self.b18["command"] = self.aberturaMon
+        self.b18.pack ()
+
+        self.b19 = Button(self.widget1)
+        self.b19["text"] = "Fechamento - Morfologia matemática monocromática"
+        self.b19["font"] = ("Calibri", "9")
+        self.b19["width"] = 55
+        self.b19["command"] = self.fechamentoMon
+        self.b19.pack ()
+
+        self.b20 = Button(self.widget1)
+        self.b20["text"] = "Gradiente"
+        self.b20["font"] = ("Calibri", "9")
+        self.b20["width"] = 55
+        self.b20["command"] = self.gradiente
+        self.b20.pack ()
+
 
     def carregar(self):
         if self.msg["text"] == "Imagem":
@@ -301,7 +337,7 @@ class Application:
             img =Imagem()
             img.carregar('img/lennaRGB.jpg')
             img.toGray
-            mat = numpy.array([[6, 8, 4], [1, 0, 3], [5, 2, 7]])
+            mat = numpy.array([[4, 3, 3], [2, 0, 2], [7, 1, 6]])
             nCanais = self.quantizacao(img, 256, len(
                 mat)*(len(mat) + 1)).getNCanais()
             altura = self.quantizacao(img, 256, len(mat)*(len(mat) + 1)).getAltura()
@@ -336,7 +372,7 @@ class Application:
             img =Imagem()
             img.carregar('img/lennaRGB.jpg')
             img.toGray
-            mat = numpy.array([[6, 8, 4], [1, 0, 3], [5, 2, 7]])
+            mat = numpy.array([[4, 3, 3], [2, 0, 2], [7, 1, 6]])
             nCanais = self.quantizacao(img, 256, len(mat)*len(mat)).getNCanais()
             altura = self.quantizacao(img, 256, len(mat)*len(mat)).getAltura()
             largura = self.quantizacao(img, 256, len(mat)*len(mat)).getLargura()
@@ -590,6 +626,284 @@ class Application:
             imagemSaida._criarComMatriz(self.subtracao(self.dilatacaoBin2(img, mat), img))
             imagemSaida.mostrar(janela, 'Borda Externa')
             return imagemSaida
+        else:
+            self.msg["text"] = "Imagem"
+
+    def subtracaoMon(self, imgA: Imagem, imgB: Imagem):
+        nCanais = imgA.getNCanais()
+        altura = imgA.getAltura()
+        largura = imgA.getLargura()
+        matA = imgA.getMatriz()
+        matB = imgB.getMatriz()
+
+        colorSub = None
+        matrizSaida = numpy.zeros((nCanais, altura, largura))
+
+        for c in range(nCanais):
+            for y in range(altura):
+                for x in range(largura):
+                    colorSub = matA[c][y][x] - matB[c][y][x]
+                    if (colorSub < 0):
+                        colorSub = 0
+                    matrizSaida[c, y, x] = colorSub
+
+        imagem = Imagem()
+        imagem.criarComMatriz(matrizSaida)
+        imagem.mostrar(janela, 'Subtração')
+        return imagem.criarComMatriz(matrizSaida)
+
+    def subtracaoMon2(self, imgA: Imagem, imgB: Imagem):
+        nCanais = imgA.getNCanais()
+        altura = imgA.getAltura()
+        largura = imgA.getLargura()
+        matA = imgA.getMatriz()
+        matB = imgB.getMatriz()
+
+        colorSub = None
+        matrizSaida = numpy.zeros((nCanais, altura, largura))
+
+        for c in range(nCanais):
+            for y in range(altura):
+                for x in range(largura):
+                    colorSub = matA[c][y][x] - matB[c][y][x]
+                    if (colorSub < 0):
+                        colorSub = 0
+                    matrizSaida[c, y, x] = colorSub
+
+        imagem = Imagem()
+        imagem.criarComMatriz(matrizSaida)
+        return imagem.getMatriz()
+
+    def erosaoMon(self):
+        if self.msg["text"] == "Imagem":
+            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+                        1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
+            img = Imagem()
+            img.carregar('img/lennaRGB.jpg')
+            img.toGray()
+            nCanais = img.getNCanais()
+            altura = img.getAltura()
+            largura = img.getLargura()
+            matrizEntrada = img.getMatriz()
+            matrizSaida = numpy.zeros((nCanais, altura, largura))
+            radius = int((len(mat) - 1)/2)
+            min = 800000000000000000
+
+            for c in range(nCanais):
+                for y in range((radius), (altura-radius)):
+                    for x in range((radius), (largura - radius)):
+                        for z in range((-radius), (radius + 1)):
+                            for w in range((-radius), (radius+1)):
+                                if(min > matrizEntrada[c][y + z][x+w] + mat[(z+radius)][(w+radius)]):
+                                    min = matrizEntrada[c][y+z][x+w] + \
+                                        mat[(z+radius)][(w+radius)]
+
+                        if (min > 0):
+                            matrizSaida[c, y, x] = min
+                        else:
+                            matrizSaida[c, y, x] = 0
+
+                        min = 800000000000000000
+
+            imagem = Imagem()
+            imagem.criarComMatriz(matrizSaida)
+            imagem.mostrar(janela, 'Erosão Mon')
+            return imagem.criarComMatriz(matrizSaida)
+        else:
+            self.msg["text"] = "Imagem"
+
+    def dilatacaoMon(self):
+        if self.msg["text"] == "Imagem":
+            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+                        1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
+            img = Imagem()
+            img.carregar('img/lennaRGB.jpg')
+            img.toGray()
+            nCanais = img.getNCanais()
+            altura = img.getAltura()
+            largura = img.getLargura()
+            matrizEntrada = img.getMatriz()
+            matrizSaida = numpy.zeros((nCanais, altura, largura))
+            radius = int((len(mat) - 1)/2)
+            max = -800000000000000000
+
+            for c in range(nCanais):
+                for y in range(radius, altura - radius):
+                    for x in range(radius, largura - radius):
+                        for z in range(-radius, radius+1):
+                            for w in range(-radius, radius+1):
+                                if (max < matrizEntrada[c][y+z][x+w] + mat[z+radius][w+radius]):
+                                    max = matrizEntrada[c][y+z][x+w] + \
+                                        mat[z+radius][w+radius]
+
+                        if (max > 0):
+                            matrizSaida[c, y, x] = max
+                        else:
+                            matrizSaida[c, y, x] = 0
+
+                        max = -800000000000000000
+
+            imagem = Imagem()
+            imagem.criarComMatriz(matrizSaida)
+            imagem.mostrar(janela, 'Dilatação Mon')
+            return imagem.criarComMatriz(matrizSaida)
+        else:
+            self.msg["text"] = "Imagem"
+
+    def erosaoMon2(self, img: Imagem, mat):
+        nCanais = img.getNCanais()
+        altura = img.getAltura()
+        largura = img.getLargura()
+        matrizEntrada = img.getMatriz()
+        matrizSaida = numpy.zeros((nCanais, altura, largura))
+        radius = int((len(mat) - 1)/2)
+        min = 800000000000000000
+
+        for c in range(nCanais):
+            for y in range((radius), (altura-radius)):
+                for x in range((radius), (largura - radius)):
+                    for z in range((-radius), (radius + 1)):
+                        for w in range((-radius), (radius+1)):
+                            if(min > matrizEntrada[c][y + z][x+w] + mat[(z+radius)][(w+radius)]):
+                                min = matrizEntrada[c][y+z][x+w] + \
+                                    mat[(z+radius)][(w+radius)]
+
+                    if (min > 0):
+                        matrizSaida[c, y, x] = min
+                    else:
+                        matrizSaida[c, y, x] = 0
+
+                    min = 800000000000000000
+
+        imagem = Imagem()
+        imagem.criarComMatriz(matrizSaida)
+        return imagem
+
+    def dilatacaoMon2(self, img: Imagem, mat):
+        nCanais = img.getNCanais()
+        altura = img.getAltura()
+        largura = img.getLargura()
+        matrizEntrada = img.getMatriz()
+        matrizSaida = numpy.zeros((nCanais, altura, largura))
+        radius = int((len(mat) - 1)/2)
+        max = -800000000000000000
+
+        for c in range(nCanais):
+            for y in range(radius, altura - radius):
+                for x in range(radius, largura - radius):
+                    for z in range(-radius, radius+1):
+                        for w in range(-radius, radius+1):
+                            if (max < matrizEntrada[c][y+z][x+w] + mat[z+radius][w+radius]):
+                                max = matrizEntrada[c][y+z][x+w] + \
+                                    mat[z+radius][w+radius]
+
+                    if (max > 0):
+                        matrizSaida[c, y, x] = max
+                    else:
+                        matrizSaida[c, y, x] = 0
+
+                    max = -800000000000000000
+
+        imagem = Imagem()
+        imagem.criarComMatriz(matrizSaida)
+        return imagem
+
+    def erosaoMon3(self, img: Imagem, mat, bool=False):
+        nCanais = img.getNCanais()
+        altura = img.getAltura()
+        largura = img.getLargura()
+        matrizEntrada = img.getMatriz()
+        matrizSaida = numpy.zeros((nCanais, altura, largura))
+        radius = int((len(mat) - 1)/2)
+        min = 800000000000000000
+
+        for c in range(nCanais):
+            for y in range((radius), (altura-radius)):
+                for x in range((radius), (largura - radius)):
+                    for z in range((-radius), (radius + 1)):
+                        for w in range((-radius), (radius+1)):
+                            if(min > matrizEntrada[c][y + z][x+w] + mat[(z+radius)][(w+radius)]):
+                                min = matrizEntrada[c][y+z][x+w] + \
+                                    mat[(z+radius)][(w+radius)]
+
+                    if (min > 0):
+                        matrizSaida[c, y, x] = min
+                    else:
+                        matrizSaida[c, y, x] = 0
+
+                    min = 800000000000000000
+
+        imagem = Imagem()
+        imagem.criarComMatriz(matrizSaida)
+        if (bool == True):
+            imagem.mostrar(janela, 'Fechamento Mon')
+        imagem.mostrar(janela, 'Erosão Mon')
+        return imagem.criarComMatriz(matrizSaida)
+
+    def dilatacaoMon3(self, img: Imagem, mat, bool=False):
+        nCanais = img.getNCanais()
+        altura = img.getAltura()
+        largura = img.getLargura()
+        matrizEntrada = img.getMatriz()
+        matrizSaida = numpy.zeros((nCanais, altura, largura))
+        radius = int((len(mat) - 1)/2)
+        max = -800000000000000000
+
+        for c in range(nCanais):
+            for y in range(radius, altura - radius):
+                for x in range(radius, largura - radius):
+                    for z in range(-radius, radius+1):
+                        for w in range(-radius, radius+1):
+                            if (max < matrizEntrada[c][y+z][x+w] + mat[z+radius][w+radius]):
+                                max = matrizEntrada[c][y+z][x+w] + \
+                                    mat[z+radius][w+radius]
+
+                    if (max > 0):
+                        matrizSaida[c, y, x] = max
+                    else:
+                        matrizSaida[c, y, x] = 0
+
+                    max = -800000000000000000
+
+        imagem = Imagem()
+        imagem.criarComMatriz(matrizSaida)
+        if (bool == True):
+            imagem.mostrar(janela, 'Abertura Mon')
+        imagem.mostrar(janela, 'Dilatação Mon')
+        return imagem.criarComMatriz(matrizSaida)
+
+    def aberturaMon(self):
+        if self.msg["text"] == "Imagem":
+            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+                        1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
+            img = Imagem()
+            img.carregar('img/lennaRGB.jpg')
+            return self.dilatacaoMon3(self.erosaoMon2(img, mat), mat)
+        else:
+            self.msg["text"] = "Imagem"
+
+    def fechamentoMon(self):
+        if self.msg["text"] == "Imagem":
+            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+                        1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
+            img = Imagem()
+            img.carregar('img/lennaRGB.jpg')
+            img.toGray()
+            return self.erosaoMon3(self.dilatacaoMon2(img, mat), mat, True)
+        else:
+            self.msg["text"] = "Imagem"
+
+    def gradiente(self):
+        if self.msg["text"] == "Imagem":
+            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+                        1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
+            img = Imagem()
+            img.carregar('img/lennaRGB.jpg')
+            img.toGray()
+            imagem = Imagem()
+            imagem.criarComMatriz(self.subtracaoMon2(
+                self.dilatacaoMon2(img, mat), self.erosaoMon2(img, mat)))
+            return imagem.mostrar(janela, 'Gradiente')
         else:
             self.msg["text"] = "Imagem"
 
