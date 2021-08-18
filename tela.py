@@ -164,309 +164,355 @@ class Application:
     def carregar(self):
         if self.msg["text"] == "Imagem":
             #self.msg["text"] = "Teste"
-            img1=Imagem()
-            img1.carregar('img/lennaRGB.jpg')
-            img1.mostrar(janela, 'Testando lennaRGB.jpg')
+            img1=Imagem() #Cria um objeto do tipo Imagem
+            img1.carregar('img/lenna.png') #Carrega a imagem do diretório
+            img1.mostrar(janela, 'Testando lenna.png')#Mostrar na tela a imagem
         else:
             self.msg["text"] = "Imagem"
 
     def criarVazia(self):
         if self.msg["text"] == "Imagem":
-            img2=Imagem()
+            img2=Imagem() #Cria um objeto do tipo Imagem
             img2.criarVazia('RGB',100,200,)
-            img2.mostrar(janela,'Vazia RGB 100x200')
+            img2.mostrar(janela,'Vazia RGB 100x200')#Mostrar na tela a imagem tratada.
         else:
             self.msg["text"] = "Imagem"
 
     def criarDeMatriz(self):
         if self.msg["text"] == "Imagem":
-            img3=Imagem()
-            mat=[[[255,255,255],[255,255,255],[255,255,255]],
+            img3=Imagem() #Cria um objeto do tipo Imagem
+            matriz=[[[255,255,255],[255,255,255],[255,255,255]],
                 [[0,0,0],[0,0,0],[0,0,0]],
                 [[0,0,0],[0,0,0],[0,0,0]]    ]
-            img3.criarComMatriz(mat)
-            img3.mostrar(janela,'Criando através de uma matriz pré-existente')
+            img3.criarComMatriz(matriz)
+            img3.mostrar(janela,'Criando através de uma matriz pré-existente')#Mostrar na tela a imagem tratada.
         else:
             self.msg["text"] = "Imagem"
 
     def converteParaRgb(self):
         if self.msg["text"] == "Imagem":
-            img4 = Imagem()
-            img4.carregar('img/lennaRGB.jpg')
-            img4.mostrar(janela)
+            img4 = Imagem() #Cria um objeto do tipo Imagem
+            img4.carregar('img/lenna.png') #Carrega a imagem do diretório
+            img4.mostrar(janela)#Mostrar na tela a imagem tratada.
             img4.toRGB()
-            img4.mostrar(janela)
+            img4.mostrar(janela)#Mostrar na tela a imagem tratada.
         else:
             self.msg["text"] = "Imagem"
 
     def converteParaCinza(self):
         if self.msg["text"] == "Imagem":
-            img4 = Imagem()
-            img4.carregar('img/lennaRGB.jpg')
-            img4.mostrar(janela)
+            img4 = Imagem() #Cria um objeto do tipo Imagem
+            img4.carregar('img/lennaRGB.jpg') #Carrega a imagem do diretório
+            img4.mostrar(janela)#Mostrar na tela a imagem tratada.
             img4.toGray()
-            img4.mostrar(janela)
+            img4.mostrar(janela)#Mostrar na tela a imagem tratada.
         else:
             self.msg["text"] = "Imagem"
 
     def getMatriz(self):
         if self.msg["text"] == "Imagem":
-            img =Imagem()
-            # img.carregar('img/olho.png')
-            img.carregar('img/lennaRGB.jpg')
-            # img.criarVazia('L',4,5)
-            mat=img.getMatriz()    
+            imagemEntrada =Imagem() #Cria um objeto do tipo Imagem
+            # imagemEntrada.carregar('img/olho.png') #Carrega a imagem do diretório
+            imagemEntrada.carregar('img/lennaRGB.jpg') #Carrega a imagem do diretório
+            # imagemEntrada.criarVazia('L',4,5)
+            matriz=imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))    
             for i in range(30):
-                mat[0][i][i]=255
-            img.criarComMatriz(mat)  
-            img.mostrar(janela)
+                matriz[0][i][i]=255
+            imagemEntrada.criarComMatriz(matriz)  
+            imagemEntrada.mostrar(janela)#Mostrar na tela a imagem tratada.
         else:
             self.msg["text"] = "Imagem"
 
     def salvar(self):
         if self.msg["text"] == "Imagem":
-            img =Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            mat=img.getMatriz()    
+            imagemEntrada =Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/lennaRGB.jpg') #Carrega a imagem do diretório
+            matriz=imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))    
             for i in range(100):
-                mat[0][i][i]=200
-                mat[0][i][i]=128
-            img.criarComMatriz(mat)  
-            img.mostrar(janela)
-            img.salvar('img/testeSalvar.png',img.TYPE_PNG())
-            img.salvar('img/testeSalvar.jpg',img.TYPE_JPG())
-            img.salvar('img/testeSalvar.gif',img.TYPE_GIF())
-            img.salvar('img/testeSalvar.pdf',img.TYPE_PDF())
+                matriz[0][i][i]=200
+                matriz[0][i][i]=128
+            imagemEntrada.criarComMatriz(matriz)  
+            imagemEntrada.mostrar(janela)#Mostrar na tela a imagem tratada.
+            imagemEntrada.salvar('img/testeSalvar.png',imagemEntrada.TYPE_PNG())
+            imagemEntrada.salvar('img/testeSalvar.jpg',imagemEntrada.TYPE_JPG())
+            imagemEntrada.salvar('img/testeSalvar.gif',imagemEntrada.TYPE_GIF())
+            imagemEntrada.salvar('img/testeSalvar.pdf',imagemEntrada.TYPE_PDF())
         else:
             self.msg["text"] = "Imagem"
 
     def subtracao(self, imgA: Imagem, imgB: Imagem):
-        nCanais = imgA.getNCanais()
-        altura = imgA.getAltura()
-        largura = imgA.getLargura()
-        matA = imgA.getMatriz()
-        matB = imgB.getMatriz()
+        nCanais = imgA.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imgA.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imgA.getLargura() #Numero correspondente a Largura da Imagem
+        matA = imgA.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        matB = imgB.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
 
-        cor = None
-        matrizSaida = numpy.zeros((nCanais, altura, largura))
-
-        for c in range(nCanais):
-            for y in range(altura):
-                for x in range(largura):
-                    cor = matA[c][y][x] - matB[c-1][y-1][x-1]
-                    if (cor < 0):
-                        cor = 0
-                    matrizSaida[c, y, x] = cor
+        cor = None #Inicializa variável cor. 
+        matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+        
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+            for y in range(altura): # Laço de posição altura y
+                for x in range(largura): # Laço de posição altura x
+                    cor = matA[c][y][x] - matB[c-1][y-1][x-1] #Realiza subtração 
+                    if (cor < 0): #Evita estouro para números negativos
+                        cor = 0 #Seta zero caso seja um número negativo
+                    matrizSaida[c, y, x] = cor # Seta resultado da subtração no pixel atual.
 
         return matrizSaida
 
+    #A limiarização converte uma imagem em níveis de cinza ou colorida numa imagem binária,
+    #baseado somente no valor do pixel.
+
+    #O método de limiar simples substitui cada pixel na imagem seguindo a seguinte regra:
+    #Substitui por um pixel preto se f(i,j) for menor que o limiar, ou por um pixel branco caso contrário.
     def limiarSimples(self):
         if self.msg["text"] == "Imagem":
-            img =Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray
-            nCanais = img.getNCanais()
-            altura = img.getAltura()
-            largura = img.getLargura()
-            matriz = img.getMatriz()
-            matO = numpy.zeros((nCanais, altura, largura))
-            branco = 255
-            preto = 0
-            threshold = int((branco + preto) / 2)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/limiarotimo.jpg') #Carrega a imagem do diretório
+            nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+            altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+            largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+            matriz = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+            matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura. #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+            branco = 255 # 255 é o valor equivalente ao pixel branco
+            preto = 0 # 0 é o valor equivalente ao pixel preto # 0 é o valor equivalente ao pixel preto
 
-            for c in range(nCanais):
-                for y in range(altura):
-                    for x in range(largura):
-                        if (matriz[c][y][x] < threshold):
-                            matO[c, y, x] = preto
+            #limiar = 128;
+            limiar = 64; #Limiar para substituição
+            #limiar = 32;
+            #limiar = 16;
+
+            #Laços que percorrem cada pixel
+            for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+                for y in range(altura): # Laço de posição altura y
+                    for x in range(largura): # Laço de posição altura x
+                        if (matriz[c][y][x] < limiar): # Verifica se o valor do Pixel no canal c, altura y, largura x é menor que o limiar. 
+                            matrizSaida[c, y, x] = preto # Seta o valor do pixel em 0.
                         else:
-                            matO[c, y, x] = branco
+                            matrizSaida[c, y, x] = branco # Seta o valor do pixel em 255.
 
-            imagem = Imagem()
-            imagem.criarComMatriz(matO)
-            imagem.mostrar(janela, 'Limiar Simples')
-            return imagem
+            imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+            imagemSaida.criarComMatriz(matrizSaida) # Cria a imagem de saída com os dados da matriz de saída. 
+            imagemSaida.mostrar(janela, 'Limiar Simples') #Mostrar na tela a imagem tratada.  
+            return imagemSaida 
         else:
             self.msg["text"] = "Imagem"
 
+    # O método de Limiar com Modulação Aleatória substitui cada pixel na imagem seguindo a seguinte regra:
+    # Substitui por um pixel preto caso o valor de temp (temp = pixel - valorAleatório) 
+    # for menor que o limiar, ou por um pixel branco caso contrário.
     def limiarComModulacaoAleatoria(self):
         if self.msg["text"] == "Imagem":
-            img =Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray
-            nCanais = img.getNCanais()
-            altura = img.getAltura()
-            largura = img.getLargura()
-            matriz = img.getMatriz()
-            matO = numpy.zeros((nCanais, altura, largura))
-            branco = 255
-            preto = 0
-            threshold = int((branco + preto) / 2)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/limiarotimo.jpg') #Carrega a imagem do diretório
+            nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+            altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+            largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+            matriz = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+            matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+            branco = 255 # 255 é o valor equivalente ao pixel branco
+            preto = 0 # 0 é o valor equivalente ao pixel preto
+            
+            #limiar = 128;
+            limiar = 64; #Limiar para substituição
+            #limiar = 32;
+            #limiar = 16;
+            #limiar = (branco + preto)/2;
 
-            for c in range(nCanais):
-                for y in range(altura):
-                    for x in range(largura):
-                        aux = matriz[c][y][x] + randrange(-128, 128) - threshold
-                        if (aux < threshold):
-                            matO[c, y, x] = preto
+            #Laços que percorrem cada pixel
+            for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+                for y in range(altura): # Laço de posição altura y
+                    for x in range(largura): # Laço de posição altura x   
+                        temp = matriz[c][y][x] + randrange(-255, 255) # Soma o valor do Pixel no canal c, altura y, largura x
+                                                                      # com um número aleatório no intervalo de -255 a 255. 
+                        if (temp < limiar): # Verifica se o valor do Pixel resultante é menor que o limiar. 
+                            matrizSaida[c, y, x] = preto # Seta o valor do pixel em 0.
                         else:
-                            matO[c, y, x] = branco
+                            matrizSaida[c, y, x] = branco # Seta o valor do pixel em 255.
 
-            imagem = Imagem()
-            imagem.criarComMatriz(matO)
-            imagem.mostrar(janela, 'Limiar com modulação aleatória')
-            return imagem
+            imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+            imagemSaida.criarComMatriz(matrizSaida) # Cria a imagem de saída com os dados da matriz de saída. 
+            imagemSaida.mostrar(janela, 'Limiar com modulação aleatória') #Mostrar na tela a imagem tratada.
+            return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
-    def quantizacao(self, img: Imagem, input, output):
-        img =Imagem()
-        img.carregar('img/lennaRGB.jpg')
-        img.toGray
-        faixa = int(input/output)
-        mat = img.getMatriz()
-        nCanais = img.getNCanais()
-        altura = img.getAltura()
-        largura = img.getLargura()
+    def quantizacao(self, imagemEntrada: Imagem, entrada, saida):
+        imagemEntrada =Imagem() #Cria um objeto do tipo Imagem
+        imagemEntrada.carregar('img/limiarotimo.jpg') #Carrega a imagem do diretório
+        faixa = int(entrada/saida) # Determina a faixa do intervalo entre entrada e saída
+        matriz = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
 
-        for c in range(nCanais):
-            for y in range(altura):
-                for x in range(largura):
-                    color = int(mat[c][y][x]/faixa)
-                    mat[c][y][x] = color
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+            for y in range(altura): # Laço de posição altura y
+                for x in range(largura): # Laço de posição altura x
+                    color = int(matriz[c][y][x]/faixa) # Valor do pixel é o valor atual dividido pelo valor da faixa
+                    matriz[c][y][x] = color
 
-        imagem = Imagem()
-        imagem.criarComMatriz(mat)
-        return imagem
+        imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+        imagemSaida.criarComMatriz(matriz) # Cria a imagem de saída com os dados da matriz de saída. 
+        return imagemSaida
 
+    # O método de Limiar com Modulação Ordenada Periódico Aglomerado substitui cada pixel na imagem seguindo a seguinte regra:
+    # Substitui por um pixel branco caso o valor do pixel for maior que o valor do 
+    # pixel da matriz de Dithering de entrada, ou por um pixel preto caso contrário.
+    # Inicialmente deve-se quantizar a imagem para NxN + 1 níveis.
+    # A Imagem de saída será maior que a de entrada. 
     def limiarComModulacaoOrdenadaPeriodicoAglomerado(self):
         if self.msg["text"] == "Imagem":
-            img =Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray
-            mat = numpy.array([[4, 3, 3], [2, 0, 2], [7, 1, 6]])
-            nCanais = self.quantizacao(img, 256, len(
-                mat)*(len(mat) + 1)).getNCanais()
-            altura = self.quantizacao(img, 256, len(mat)*(len(mat) + 1)).getAltura()
-            largura = self.quantizacao(img, 256, len(mat)*(len(mat) + 1)).getLargura()
-            matriz = self.quantizacao(img, 256, len(mat)*(len(mat) + 1)).getMatriz()
-            coefficient = len(mat)
-            matO = numpy.zeros((nCanais, altura*coefficient, largura*coefficient))
-            branco = 255
-            preto = 0
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/limiarotimo.jpg') #Carrega a imagem do diretório
+            matrizDithering = numpy.array([[2, 2, 2], [2, 2, 2]]) # Matriz de Dithering NXN
+            
+            entradaQuantizacao = 255 # Valor de entrada para quantização
+            saidaQuantizacao = len(matrizDithering)*len(matrizDithering) + 1 #Valor de saída quantização
+            matrizQuantizada = self.quantizacao(imagemEntrada, entradaQuantizacao, saidaQuantizacao) # Realiza a Quantização. 
+            
+            nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+            altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+            largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
 
-            for c in range(nCanais):
-                for y in range(altura):
-                    for x in range(largura):
-                        for z in range(len(mat)):
-                            for w in range(len(mat[z])):
-                                if (matriz[c][y][x] > mat[z][w]):
-                                    matO[c, y*coefficient + z,
-                                        x*coefficient + w] = branco
+            matrizEntrada = matrizQuantizada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+            matrizSaida = numpy.zeros((nCanais, altura, largura))
+            branco = 255 # 255 é o valor equivalente ao pixel branco
+            preto = 0 # 0 é o valor equivalente ao pixel preto
+            
+            #Laços que percorrem cada pixel
+            for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+                for y in range(altura): # Laço de posição altura y
+                    for x in range(largura): # Laço de posição altura x
+                        for d in range(len(matrizDithering)): # Laço que percorre o tamanho da matrizDithering
+                            for i in range(len(matrizDithering[d])): # Posição i percorrendo a matrizDithering
+                                if (matrizEntrada[c][y][x] > matrizDithering[d][i]): # Se Valor do pixel é maior que valor da Posição [d][i] percorrendo a matrizDithering
+                                    matrizSaida[c, y, x] = branco # Seta o valor do pixel em 255.
                                 else:
-                                    matO[c, y*coefficient + z,
-                                        x*coefficient + w] = preto
+                                    matrizSaida[c, y, x] = preto # Seta o valor do pixel em 0.
 
-            imagem = Imagem()
-            imagem.criarComMatriz(matO)
-            imagem.mostrar(janela, 'Limiar com modulação ordenada periódico aglomerado')
-            return imagem
+            imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+            imagemSaida.criarComMatriz(matrizSaida) # Cria a imagem de saída com os dados da matriz de saída. 
+            imagemSaida.mostrar(janela, 'Limiar com modulação ordenada periódico aglomerado') #Mostrar na tela a imagem tratada.
+            return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
+    # O método de Limiar com Modulação Ordenada Periódico Disperso substitui cada pixel na imagem seguindo a seguinte regra:
+    # Substitui por um pixel branco caso o valor do pixel for maior que o valor do 
+    # pixel da matriz de Dithering de entrada na posição Posição [i][j] sendo que 
+    # j = y % dimensao
+    # i = x % dimensao
+    # dimensao = len(matrizDithering) 
+    # ,ou por um pixel preto caso contrário.
     def limiarComModulacaoOrdenadaPeriodicoDisperso(self):
         if self.msg["text"] == "Imagem":
-            img =Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray
-            mat = numpy.array([[4, 3, 3], [2, 0, 2], [7, 1, 6]])
-            nCanais = self.quantizacao(img, 256, len(mat)*len(mat)).getNCanais()
-            altura = self.quantizacao(img, 256, len(mat)*len(mat)).getAltura()
-            largura = self.quantizacao(img, 256, len(mat)*len(mat)).getLargura()
-            matriz = self.quantizacao(img, 256, len(mat)*len(mat)).getMatriz()
-            matO = numpy.zeros((nCanais, altura, largura))
-            branco = 255
-            preto = 0
-            aux = len(mat)
-            z = 0
-            w = 0
+            imagemEntrada =Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/limiarotimo.jpg') #Carrega a imagem do diretório
+            matrizDithering = numpy.array([[1, 2, 3], [3, 2, 1]]) # Matriz de Dithering NXN
+            nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+            altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+            largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+            
+            entradaQuantizacao = 255 # Valor de entrada para quantização
+            saidaQuantizacao = len(matrizDithering)*len(matrizDithering) #Valor de saída quantização
+            matrizQuantizada = self.quantizacao(imagemEntrada, entradaQuantizacao, saidaQuantizacao) # Realiza a Quantização. 
+            
+            matrizEntrada = matrizQuantizada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+            matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+            branco = 255 # 255 é o valor equivalente ao pixel branco
+            preto = 0 # 0 é o valor equivalente ao pixel preto
+            dimensao = len(matrizDithering)
+            i = 0
+            j = 0
 
-            for c in range(nCanais):
-                for y in range(altura):
-                    w = y % aux
-                    for x in range(largura):
-                        z = x % aux
-
-                        if (matriz[c][y][x] > mat[w][z]):
-                            matO[c, y, x] = branco
+            #Laços que percorrem cada pixel
+            for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+                for y in range(altura): # Laço de posição altura y
+                    j = y % dimensao # Resto da divisão inteira
+                    for x in range(largura): # Laço de posição altura x
+                        i = x % dimensao # Resto da divisão inteira
+                        if (matrizEntrada[c][y][x] > matrizDithering[i][j]): # Se Valor do pixel é maior que valor da Posição [i][j] percorrendo a matrizDithering
+                            matrizSaida[c, y, x] = branco # Seta o valor do pixel em 255.
                         else:
-                            matO[c, y, x] = preto
+                            matrizSaida[c, y, x] = preto # Seta o valor do pixel em 0.
 
-            imagem = Imagem()
-            imagem.criarComMatriz(matO)
-            imagem.mostrar(janela, 'Limiar com modulação ordenada periódico disperso')
-            return imagem
+            imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+            imagemSaida.criarComMatriz(matrizSaida) # Cria a imagem de saída com os dados da matriz de saída. 
+            imagemSaida.mostrar(janela, 'Limiar com modulação ordenada periódico disperso') #Mostrar na tela a imagem tratada.
+            return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
+    # O método de Limiar com Modulação Aperiódico substitui cada pixel na imagem seguindo a seguinte regra:
+    # Difunde o erro de quantização entre pixels vizinhos da imagem de entrada. 
+    # A Imagem é percorrida de cima para baixo, da esquerda para a direita. 
+    # Limiar é a média da imagem
     def limiarComModulacaoOrdenadaAperiodico(self):
         if self.msg["text"] == "Imagem":
-            img =Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray
-            nCanais = img.getNCanais()
-            altura = img.getAltura()
-            largura = img.getLargura()
-            matriz = img.getMatriz()
-            matO = numpy.zeros((nCanais, altura, largura))
-            branco = 255
-            preto = 0
-            threshold = int((branco + preto + 1)/2)
-            aux = None
-
-            for c in range(nCanais):
+            imagemEntrada =Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/limiarotimo.jpg') #Carrega a imagem do diretório
+            nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+            altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+            largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+            matriz = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+            matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+            branco = 255 # 255 é o valor equivalente ao pixel branco
+            preto = 0 # 0 é o valor equivalente ao pixel preto
+            
+            #limiar = 128;
+            #limiar = 64; #Limiar para substituição
+            #limiar = 32;
+            #limiar = 16;
+            limiar = (branco + preto)/2; # Limiar é a média da imagem
+            erro = None #Inicializa a variável erro.
+            
+            #Laços que percorrem cada pixel
+            for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
                 for x in range(largura-1):
                     for y in range(altura-1):
-                        if (matriz[c][y][x] < threshold):
-                            aux = matriz[c][y][x] - preto
-                            matO[c, y, x] = preto
-
+                        if (matriz[c][y][x] < limiar):  # Verifica se o valor do Pixel no canal c, altura y, largura x é menor que o limiar.
+                            erro = matriz[c][y][x] - preto
+                            matrizSaida[c, y, x] = preto # Seta o valor do pixel em 0.
                         else:
-                            aux = matriz[c][y][x] - branco
-                            matO[c, y, x] = branco
+                            erro = matriz[c][y][x] - branco
+                            matrizSaida[c, y, x] = branco # Seta o valor do pixel em 255.
+                        matriz[c][y+1][x] += int((3/8)*erro)
+                        matriz[c][y][x+1] += int((3/8)*erro)
+                        matriz[c][y+1][x+1] += int((2/8)*erro)
 
-                        matriz[c][y+1][x] += int((3*aux)/8)
-                        matriz[c][y][x+1] += int((3*aux)/8)
-                        matriz[c][y+1][x+1] += int((aux/8))
-
-            imagem = Imagem()
-            imagem.criarComMatriz(matO)
-            imagem.mostrar(janela, 'Limiar com modulação ordenada aperiódico')
-            return imagem
+            imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+            imagemSaida.criarComMatriz(matrizSaida) # Cria a imagem de saída com os dados da matriz de saída. 
+            imagemSaida.mostrar(janela, 'Limiar com modulação ordenada aperiódico')#Mostrar na tela a imagem tratada.
+            return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
+    #Erosão - Remove pixels que não possuem o padrão do Elemento Estruturante
     def erosaoBin(self, bool=False):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
+            elementoEstruturante = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
             255, 255, 255, 255, 255], [0, 255, 255, 255, 0], [0, 0, 255, 0, 0]])
-            img = Imagem()
-            img.carregar('img/b.png')
-            nCanais = img.getNCanais()
-            altura = img.getAltura()
-            largura = img.getLargura()
-            matriz = img.getMatriz()
-            matrizSaida = numpy.zeros((nCanais, altura, largura))
-            raio = int((len(mat) - 1)/2)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/b.png') #Carrega a imagem do diretório
+            nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+            altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+            largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+            matriz = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+            matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+            raio = int((len(elementoEstruturante) - 1)/2)
             auxBool = False
 
-            for c in range(nCanais):
+            #Laços que percorrem cada pixel
+            for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
                 for y in range(raio, altura-raio):
                     for x in range(raio, largura-raio):
                         for z in range(-raio, raio+1):
                             for w in range(-raio, raio+1):
-                                if(mat[z+raio][w+raio] == 255):
-                                    if (matriz[c][y+z][x+w] != mat[z+raio][w+raio]):
+                                if(elementoEstruturante[z+raio][w+raio] == 255):
+                                    if (matriz[c][y+z][x+w] != elementoEstruturante[z+raio][w+raio]):
                                         auxBool = False
 
                         if(auxBool == True):
@@ -475,34 +521,36 @@ class Application:
                             matrizSaida[c, y, x] = 0
                         auxBool = True
 
-            imagem = Imagem()
-            imagem._criarComMatriz(matrizSaida)
+            imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+            imagemSaida._criarComMatriz(matrizSaida)
             if (bool == True):
-                imagem.mostrar(janela, 'Image Fechamento')
+                imagemSaida.mostrar(janela, 'Image Fechamento')#Mostrar na tela a imagem tratada.
             else:
-                imagem.mostrar(janela, 'Imagem Erosao')
-            return imagem
+                imagemSaida.mostrar(janela, 'Imagem Erosao')#Mostrar na tela a imagem tratada.
+            return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
-    def erosaoBin2(self, img: Imagem, mat, bool=False):
-        mat = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
+    #Erosão - Remove pixels que não possuem o padrão do Elemento Estruturante
+    def erosaoBin2(self, imagemEntrada: Imagem, matriz, bool=False):
+        elementoEstruturante = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
         255, 255, 255, 255, 255], [0, 255, 255, 255, 0], [0, 0, 255, 0, 0]])
-        nCanais = img.getNCanais()
-        altura = img.getAltura()
-        largura = img.getLargura()
-        matriz = img.getMatriz()
-        matrizSaida = numpy.zeros((nCanais, altura, largura))
-        raio = int((len(mat) - 1)/2)
+        nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+        matriz = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+        raio = int((len(matriz) - 1)/2)
         auxBool = False
 
-        for c in range(nCanais):
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
             for y in range(raio, altura-raio):
                 for x in range(raio, largura-raio):
                     for z in range(-raio, raio+1):
                         for w in range(-raio, raio+1):
-                            if(mat[z+raio][w+raio] == 255):
-                                if (matriz[c][y+z][x+w] != mat[z+raio][w+raio]):
+                            if(elementoEstruturante[z+raio][w+raio] == 255):
+                                if (matriz[c][y+z][x+w] != elementoEstruturante[z+raio][w+raio]):
                                     auxBool = False
 
                     if(auxBool == True):
@@ -511,35 +559,37 @@ class Application:
                         matrizSaida[c, y, x] = 0
                     auxBool = True
 
-        imagem = Imagem()
-        imagem._criarComMatriz(matrizSaida)
+        imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+        imagemSaida._criarComMatriz(matrizSaida)
         if (bool == True):
-            imagem.mostrar(janela, 'Image Fechamento')
+            imagemSaida.mostrar(janela, 'Image Fechamento')#Mostrar na tela a imagem tratada.
         else:
-            imagem.mostrar(janela, 'Imagem Erosao')
-        return imagem
+            imagemSaida.mostrar(janela, 'Imagem Erosao')#Mostrar na tela a imagem tratada.
+        return imagemSaida
 
+    # Dilatação - Insere pixels no conjunto de pixels que possuem o padrão do Elemento Estruturante
     def dilatacaoBin(self, bool=False):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
+            elementoEstruturante = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
             255, 255, 255, 255, 255], [0, 255, 255, 255, 0], [0, 0, 255, 0, 0]])
-            img = Imagem()
-            img.carregar('img/b.png')
-            nCanais = img.getNCanais()
-            altura = img.getAltura()
-            largura = img.getLargura()
-            matriz = img.getMatriz()
-            matrizSaida = numpy.zeros((nCanais, altura, largura))
-            raio = int((len(mat) - 1)/2)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/b.png') #Carrega a imagem do diretório
+            nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+            altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+            largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+            matriz = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+            matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+            raio = int((len(matriz) - 1)/2)
             auxBool = False
 
-            for c in range(nCanais):
+            #Laços que percorrem cada pixel
+            for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
                 for y in range(raio, altura-raio):
                     for x in range(raio, largura-raio):
                         for z in range(-raio, raio+1):
                             for w in range(-raio, raio+1):
-                                if (mat[z+raio][w+raio] == 255):
-                                    if (matriz[c][y+z][x+w] == mat[z+raio][w+raio]):
+                                if (elementoEstruturante[z+raio][w+raio] == 255):
+                                    if (matriz[c][y+z][x+w] == elementoEstruturante[z+raio][w+raio]):
                                         auxBool = True
 
                         if (auxBool == True):
@@ -548,32 +598,34 @@ class Application:
                             matrizSaida[c, y, x] = 0
                         auxBool = False
 
-            imagem = Imagem()
-            imagem._criarComMatriz(matrizSaida)
+            imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+            imagemSaida._criarComMatriz(matrizSaida)
             if (bool == True):
-                imagem.mostrar(janela, 'Imagem Abertura')
+                imagemSaida.mostrar(janela, 'Imagem Abertura')#Mostrar na tela a imagem tratada.
             else:
-                imagem.mostrar(janela, 'Imagem Dilatação')
-            return imagem
+                imagemSaida.mostrar(janela, 'Imagem Dilatação')#Mostrar na tela a imagem tratada.
+            return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
-    def dilatacaoBin2(self, img: Imagem, mat, bool=False):
-        nCanais = img.getNCanais()
-        altura = img.getAltura()
-        largura = img.getLargura()
-        matriz = img.getMatriz()
-        matrizSaida = numpy.zeros((nCanais, altura, largura))
-        raio = int((len(mat) - 1)/2)
+    # Dilatação - Insere pixels no conjunto de pixels que possuem o padrão do Elemento Estruturante
+    def dilatacaoBin2(self, imagemEntrada: Imagem, elementoEstruturante, bool=False):
+        nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+        matriz = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+        raio = int((len(matriz) - 1)/2)
         auxBool = False
 
-        for c in range(nCanais):
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
             for y in range(raio, altura-raio):
                 for x in range(raio, largura-raio):
                     for z in range(-raio, raio+1):
                         for w in range(-raio, raio+1):
-                            if (mat[z+raio][w+raio] == 255):
-                                if (matriz[c][y+z][x+w] == mat[z+raio][w+raio]):
+                            if (elementoEstruturante[z+raio][w+raio] == 255):
+                                if (matriz[c][y+z][x+w] == elementoEstruturante[z+raio][w+raio]):
                                     auxBool = True
 
                     if (auxBool == True):
@@ -582,128 +634,131 @@ class Application:
                         matrizSaida[c, y, x] = 0
                     auxBool = False
 
-        imagem = Imagem()
-        imagem._criarComMatriz(matrizSaida)
+        imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+        imagemSaida._criarComMatriz(matrizSaida)
         if (bool == True):
-            imagem.mostrar(janela, 'Imagem Abertura')
+            imagemSaida.mostrar(janela, 'Imagem Abertura')#Mostrar na tela a imagem tratada.
         else:
-            imagem.mostrar(janela, 'Imagem Dilatação')
-        return imagem
+            imagemSaida.mostrar(janela, 'Imagem Dilatação')#Mostrar na tela a imagem tratada.
+        return imagemSaida
 
     def aberturaBin(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
+            elementoEstruturante = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
             255, 255, 255, 255, 255], [0, 255, 255, 255, 0], [0, 0, 255, 0, 0]])
-            img = Imagem()
-            img.carregar('img/b.png')
-            return self.dilatacaoBin2(self.erosaoBin2(img, mat), mat, True)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/b.png') #Carrega a imagem do diretório
+            return self.dilatacaoBin2(self.erosaoBin2(imagemEntrada, elementoEstruturante), elementoEstruturante, True)
         else:
             self.msg["text"] = "Imagem"
 
     def fechamentoBin(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
+            elementoEstruturante = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
             255, 255, 255, 255, 255], [0, 255, 255, 255, 0], [0, 0, 255, 0, 0]])
-            img = Imagem()
-            img.carregar('img/b.png')
-            return self.erosaoBin2(self.dilatacaoBin2(img, mat), mat, True)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/b.png') #Carrega a imagem do diretório
+            return self.erosaoBin2(self.dilatacaoBin2(imagemEntrada, elementoEstruturante), elementoEstruturante, True)
         else:
             self.msg["text"] = "Imagem"
 
     def bordaInterna(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
+            elementoEstruturante = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
             255, 255, 255, 255, 255], [0, 255, 255, 255, 0], [0, 0, 255, 0, 0]])
-            img = Imagem()
-            img.carregar('img/b.png')
-            imagemSaida = Imagem()
-            imagemSaida._criarComMatriz(self.subtracao(img, self.erosaoBin2(img, mat)))
-            imagemSaida.mostrar(janela, 'Borda Interna')
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/b.png') #Carrega a imagem do diretório
+            imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+            imagemSaida._criarComMatriz(self.subtracao(imagemEntrada, self.erosaoBin2(imagemEntrada, elementoEstruturante)))
+            imagemSaida.mostrar(janela, 'Borda Interna')#Mostrar na tela a imagem tratada.
             return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
     def bordaExterna(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
+            elementoEstruturante = numpy.array([[0, 0, 255, 0, 0], [0, 255, 255, 255, 0], [
             255, 255, 255, 255, 255], [0, 255, 255, 255, 0], [0, 0, 255, 0, 0]])
-            img = Imagem()
-            img.carregar('img/b.png')
-            imagemSaida = Imagem()
-            imagemSaida._criarComMatriz(self.subtracao(self.dilatacaoBin2(img, mat), img))
-            imagemSaida.mostrar(janela, 'Borda Externa')
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/b.png') #Carrega a imagem do diretório
+            imagemSaida = Imagem() #Cria um objeto do tipo Imagem
+            imagemSaida._criarComMatriz(self.subtracao(self.dilatacaoBin2(imagemEntrada, elementoEstruturante), imagemEntrada))
+            imagemSaida.mostrar(janela, 'Borda Externa')#Mostrar na tela a imagem tratada.
             return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
     def subtracaoMon(self, imgA: Imagem, imgB: Imagem):
-        nCanais = imgA.getNCanais()
-        altura = imgA.getAltura()
-        largura = imgA.getLargura()
-        matA = imgA.getMatriz()
-        matB = imgB.getMatriz()
+        nCanais = imgA.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imgA.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imgA.getLargura() #Numero correspondente a Largura da Imagem
+        matA = imgA.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        matB = imgB.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
 
         colorSub = None
-        matrizSaida = numpy.zeros((nCanais, altura, largura))
+        matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
 
-        for c in range(nCanais):
-            for y in range(altura):
-                for x in range(largura):
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+            for y in range(altura): # Laço de posição altura y
+                for x in range(largura): # Laço de posição altura x
                     colorSub = matA[c][y][x] - matB[c][y][x]
                     if (colorSub < 0):
                         colorSub = 0
                     matrizSaida[c, y, x] = colorSub
 
-        imagem = Imagem()
+        imagem = Imagem() #Cria um objeto do tipo Imagem
         imagem.criarComMatriz(matrizSaida)
-        imagem.mostrar(janela, 'Subtração')
+        imagem.mostrar(janela, 'Subtração')#Mostrar na tela a imagem tratada.
         return imagem.criarComMatriz(matrizSaida)
 
     def subtracaoMon2(self, imgA: Imagem, imgB: Imagem):
-        nCanais = imgA.getNCanais()
-        altura = imgA.getAltura()
-        largura = imgA.getLargura()
-        matA = imgA.getMatriz()
-        matB = imgB.getMatriz()
+        nCanais = imgA.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imgA.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imgA.getLargura() #Numero correspondente a Largura da Imagem
+        matA = imgA.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        matB = imgB.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
 
         colorSub = None
-        matrizSaida = numpy.zeros((nCanais, altura, largura))
+        matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
 
-        for c in range(nCanais):
-            for y in range(altura):
-                for x in range(largura):
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+            for y in range(altura): # Laço de posição altura y
+                for x in range(largura): # Laço de posição altura x
                     colorSub = matA[c][y][x] - matB[c][y][x]
                     if (colorSub < 0):
                         colorSub = 0
                     matrizSaida[c, y, x] = colorSub
 
-        imagem = Imagem()
+        imagem = Imagem() #Cria um objeto do tipo Imagem
         imagem.criarComMatriz(matrizSaida)
-        return imagem.getMatriz()
+        return imagem.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
 
     def erosaoMon(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+            matriz = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
                         1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
-            img = Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray()
-            nCanais = img.getNCanais()
-            altura = img.getAltura()
-            largura = img.getLargura()
-            matrizEntrada = img.getMatriz()
-            matrizSaida = numpy.zeros((nCanais, altura, largura))
-            radius = int((len(mat) - 1)/2)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/lennaCinza.jpg') #Carrega a imagem do diretório
+            imagemEntrada.toGray()
+            nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+            altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+            largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+            matrizEntrada = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+            matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+            radius = int((len(matriz) - 1)/2)
             min = 800000000000000000
 
-            for c in range(nCanais):
+            #Laços que percorrem cada pixel
+            for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
                 for y in range((radius), (altura-radius)):
                     for x in range((radius), (largura - radius)):
                         for z in range((-radius), (radius + 1)):
                             for w in range((-radius), (radius+1)):
-                                if(min > matrizEntrada[c][y + z][x+w] + mat[(z+radius)][(w+radius)]):
+                                if(min > matrizEntrada[c][y + z][x+w] + matriz[(z+radius)][(w+radius)]):
                                     min = matrizEntrada[c][y+z][x+w] + \
-                                        mat[(z+radius)][(w+radius)]
+                                        matriz[(z+radius)][(w+radius)]
 
                         if (min > 0):
                             matrizSaida[c, y, x] = min
@@ -712,36 +767,37 @@ class Application:
 
                         min = 800000000000000000
 
-            imagem = Imagem()
+            imagem = Imagem() #Cria um objeto do tipo Imagem
             imagem.criarComMatriz(matrizSaida)
-            imagem.mostrar(janela, 'Erosão Mon')
+            imagem.mostrar(janela, 'Erosão Mon')#Mostrar na tela a imagem tratada.
             return imagem.criarComMatriz(matrizSaida)
         else:
             self.msg["text"] = "Imagem"
 
     def dilatacaoMon(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+            matriz = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
                         1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
-            img = Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray()
-            nCanais = img.getNCanais()
-            altura = img.getAltura()
-            largura = img.getLargura()
-            matrizEntrada = img.getMatriz()
-            matrizSaida = numpy.zeros((nCanais, altura, largura))
-            radius = int((len(mat) - 1)/2)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/lennaCinza.jpg') #Carrega a imagem do diretório
+            imagemEntrada.toGray()
+            nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+            altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+            largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+            matrizEntrada = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+            matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+            radius = int((len(matriz) - 1)/2)
             max = -800000000000000000
 
-            for c in range(nCanais):
+            #Laços que percorrem cada pixel
+            for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
                 for y in range(radius, altura - radius):
                     for x in range(radius, largura - radius):
                         for z in range(-radius, radius+1):
                             for w in range(-radius, radius+1):
-                                if (max < matrizEntrada[c][y+z][x+w] + mat[z+radius][w+radius]):
+                                if (max < matrizEntrada[c][y+z][x+w] + matriz[z+radius][w+radius]):
                                     max = matrizEntrada[c][y+z][x+w] + \
-                                        mat[z+radius][w+radius]
+                                        matriz[z+radius][w+radius]
 
                         if (max > 0):
                             matrizSaida[c, y, x] = max
@@ -750,30 +806,31 @@ class Application:
 
                         max = -800000000000000000
 
-            imagem = Imagem()
+            imagem = Imagem() #Cria um objeto do tipo Imagem
             imagem.criarComMatriz(matrizSaida)
-            imagem.mostrar(janela, 'Dilatação Mon')
+            imagem.mostrar(janela, 'Dilatação Mon')#Mostrar na tela a imagem tratada.
             return imagem.criarComMatriz(matrizSaida)
         else:
             self.msg["text"] = "Imagem"
 
-    def erosaoMon2(self, img: Imagem, mat):
-        nCanais = img.getNCanais()
-        altura = img.getAltura()
-        largura = img.getLargura()
-        matrizEntrada = img.getMatriz()
-        matrizSaida = numpy.zeros((nCanais, altura, largura))
-        radius = int((len(mat) - 1)/2)
+    def erosaoMon2(self, imagemEntrada: Imagem, matriz):
+        nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+        matrizEntrada = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+        radius = int((len(matriz) - 1)/2)
         min = 800000000000000000
 
-        for c in range(nCanais):
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
             for y in range((radius), (altura-radius)):
                 for x in range((radius), (largura - radius)):
                     for z in range((-radius), (radius + 1)):
                         for w in range((-radius), (radius+1)):
-                            if(min > matrizEntrada[c][y + z][x+w] + mat[(z+radius)][(w+radius)]):
+                            if(min > matrizEntrada[c][y + z][x+w] + matriz[(z+radius)][(w+radius)]):
                                 min = matrizEntrada[c][y+z][x+w] + \
-                                    mat[(z+radius)][(w+radius)]
+                                    matriz[(z+radius)][(w+radius)]
 
                     if (min > 0):
                         matrizSaida[c, y, x] = min
@@ -782,27 +839,28 @@ class Application:
 
                     min = 800000000000000000
 
-        imagem = Imagem()
+        imagem = Imagem() #Cria um objeto do tipo Imagem
         imagem.criarComMatriz(matrizSaida)
         return imagem
 
-    def dilatacaoMon2(self, img: Imagem, mat):
-        nCanais = img.getNCanais()
-        altura = img.getAltura()
-        largura = img.getLargura()
-        matrizEntrada = img.getMatriz()
-        matrizSaida = numpy.zeros((nCanais, altura, largura))
-        radius = int((len(mat) - 1)/2)
+    def dilatacaoMon2(self, imagemEntrada: Imagem, matriz):
+        nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+        matrizEntrada = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+        radius = int((len(matriz) - 1)/2)
         max = -800000000000000000
 
-        for c in range(nCanais):
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
             for y in range(radius, altura - radius):
                 for x in range(radius, largura - radius):
                     for z in range(-radius, radius+1):
                         for w in range(-radius, radius+1):
-                            if (max < matrizEntrada[c][y+z][x+w] + mat[z+radius][w+radius]):
+                            if (max < matrizEntrada[c][y+z][x+w] + matriz[z+radius][w+radius]):
                                 max = matrizEntrada[c][y+z][x+w] + \
-                                    mat[z+radius][w+radius]
+                                    matriz[z+radius][w+radius]
 
                     if (max > 0):
                         matrizSaida[c, y, x] = max
@@ -811,27 +869,28 @@ class Application:
 
                     max = -800000000000000000
 
-        imagem = Imagem()
+        imagem = Imagem() #Cria um objeto do tipo Imagem
         imagem.criarComMatriz(matrizSaida)
         return imagem
 
-    def erosaoMon3(self, img: Imagem, mat, bool=False):
-        nCanais = img.getNCanais()
-        altura = img.getAltura()
-        largura = img.getLargura()
-        matrizEntrada = img.getMatriz()
-        matrizSaida = numpy.zeros((nCanais, altura, largura))
-        radius = int((len(mat) - 1)/2)
+    def erosaoMon3(self, imagemEntrada: Imagem, matriz, bool=False):
+        nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+        matrizEntrada = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+        radius = int((len(matriz) - 1)/2)
         min = 800000000000000000
 
-        for c in range(nCanais):
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
             for y in range((radius), (altura-radius)):
                 for x in range((radius), (largura - radius)):
                     for z in range((-radius), (radius + 1)):
                         for w in range((-radius), (radius+1)):
-                            if(min > matrizEntrada[c][y + z][x+w] + mat[(z+radius)][(w+radius)]):
+                            if(min > matrizEntrada[c][y + z][x+w] + matriz[(z+radius)][(w+radius)]):
                                 min = matrizEntrada[c][y+z][x+w] + \
-                                    mat[(z+radius)][(w+radius)]
+                                    matriz[(z+radius)][(w+radius)]
 
                     if (min > 0):
                         matrizSaida[c, y, x] = min
@@ -840,30 +899,31 @@ class Application:
 
                     min = 800000000000000000
 
-        imagem = Imagem()
+        imagem = Imagem() #Cria um objeto do tipo Imagem
         imagem.criarComMatriz(matrizSaida)
         if (bool == True):
-            imagem.mostrar(janela, 'Fechamento Mon')
-        imagem.mostrar(janela, 'Erosão Mon')
+            imagem.mostrar(janela, 'Fechamento Mon')#Mostrar na tela a imagem tratada.
+        imagem.mostrar(janela, 'Erosão Mon')#Mostrar na tela a imagem tratada.
         return imagem.criarComMatriz(matrizSaida)
 
-    def dilatacaoMon3(self, img: Imagem, mat, bool=False):
-        nCanais = img.getNCanais()
-        altura = img.getAltura()
-        largura = img.getLargura()
-        matrizEntrada = img.getMatriz()
-        matrizSaida = numpy.zeros((nCanais, altura, largura))
-        radius = int((len(mat) - 1)/2)
+    def dilatacaoMon3(self, imagemEntrada: Imagem, matriz, bool=False):
+        nCanais = imagemEntrada.getNCanais() #Indice Canais 3 (RGB) ou 1 (CINZA)
+        altura = imagemEntrada.getAltura() #Numero correspondente a Altura da Imagem
+        largura = imagemEntrada.getLargura() #Numero correspondente a Largura da Imagem
+        matrizEntrada = imagemEntrada.getMatriz() #Matriz dos (3 Canais (1, 2 e 3 - RGB) ou 1 (CINZA))
+        matrizSaida = numpy.zeros((nCanais, altura, largura)) #Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
+        radius = int((len(matriz) - 1)/2)
         max = -800000000000000000
 
-        for c in range(nCanais):
+        #Laços que percorrem cada pixel
+        for c in range(nCanais): #Laço que percorre todos os canais (3 se RGB, 1 se cinza)
             for y in range(radius, altura - radius):
                 for x in range(radius, largura - radius):
                     for z in range(-radius, radius+1):
                         for w in range(-radius, radius+1):
-                            if (max < matrizEntrada[c][y+z][x+w] + mat[z+radius][w+radius]):
+                            if (max < matrizEntrada[c][y+z][x+w] + matriz[z+radius][w+radius]):
                                 max = matrizEntrada[c][y+z][x+w] + \
-                                    mat[z+radius][w+radius]
+                                    matriz[z+radius][w+radius]
 
                     if (max > 0):
                         matrizSaida[c, y, x] = max
@@ -872,65 +932,60 @@ class Application:
 
                     max = -800000000000000000
 
-        imagem = Imagem()
+        imagem = Imagem() #Cria um objeto do tipo Imagem
         imagem.criarComMatriz(matrizSaida)
         if (bool == True):
-            imagem.mostrar(janela, 'Abertura Mon')
-        imagem.mostrar(janela, 'Dilatação Mon')
+            imagem.mostrar(janela, 'Abertura Mon')#Mostrar na tela a imagem tratada.
+        imagem.mostrar(janela, 'Dilatação Mon')#Mostrar na tela a imagem tratada.
         return imagem.criarComMatriz(matrizSaida)
 
     def aberturaMon(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+            matriz = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
                         1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
-            img = Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray()
-            return self.dilatacaoMon3(self.erosaoMon2(img, mat), mat)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/lennaCinza.jpg') #Carrega a imagem do diretório
+            return self.dilatacaoMon3(self.erosaoMon2(imagemEntrada, matriz), matriz)
         else:
             self.msg["text"] = "Imagem"
 
-    def aberturaMon2(self,  img: Imagem, mat):
-        img.toGray()
-        return self.dilatacaoMon3(self.erosaoMon2(img, mat), mat)
+    def aberturaMon2(self,  imagemEntrada: Imagem, matriz):
+        return self.dilatacaoMon3(self.erosaoMon2(imagemEntrada, matriz), matriz)
 
     def fechamentoMon(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+            matriz = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
                         1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
-            img = Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray()
-            return self.erosaoMon3(self.dilatacaoMon2(img, mat), mat, True)
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/lennaCinza.jpg') #Carrega a imagem do diretório
+            return self.erosaoMon3(self.dilatacaoMon2(imagemEntrada, matriz), matriz, True)
         else:
             self.msg["text"] = "Imagem"
 
-    def fechamentoMon2(self,  img: Imagem, mat):
-        img.toGray()
-        return self.erosaoMon3(self.dilatacaoMon2(img, mat), mat, True)
+    def fechamentoMon2(self,  imagemEntrada: Imagem, matriz):
+        return self.erosaoMon3(self.dilatacaoMon2(imagemEntrada, matriz), matriz, True)
 
     def gradiente(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+            matriz = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
                         1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
-            img = Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray()
-            imagem = Imagem()
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/lennaRGB.jpg') #Carrega a imagem do diretório
+            imagemEntrada.toGray()
+            imagem = Imagem() #Cria um objeto do tipo Imagem
             imagem.criarComMatriz(self.subtracaoMon2(
-                self.dilatacaoMon2(img, mat), self.erosaoMon2(img, mat)))
-            return imagem.mostrar(janela, 'Gradiente')
+                self.dilatacaoMon2(imagemEntrada, matriz), self.erosaoMon2(imagemEntrada, matriz)))
+            return imagem.mostrar(janela, 'Gradiente')#Mostrar na tela a imagem tratada.
         else:
             self.msg["text"] = "Imagem"
 
     def smoothing(self):
         if self.msg["text"] == "Imagem":
-            mat = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
+            matriz = numpy.array([[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [
                         1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]])
-            img = Imagem()
-            img.carregar('img/lennaRGB.jpg')
-            img.toGray()
-            return self.aberturaMon2(self.fechamentoMon2(img, mat), mat) 
+            imagemEntrada = Imagem() #Cria um objeto do tipo Imagem
+            imagemEntrada.carregar('img/lennaRGB.jpg') #Carrega a imagem do diretório
+            return self.aberturaMon2(self.fechamentoMon2(imagemEntrada, matriz), matriz) 
         else:
             self.msg["text"] = "Imagem"
 
