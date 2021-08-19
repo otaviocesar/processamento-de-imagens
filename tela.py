@@ -21,20 +21,6 @@ class Application:
         self.b1["command"] = self.carregar
         self.b1.pack()
 
-        self.b2 = Button(self.widget1)
-        self.b2["text"] = "Converte para cinza"
-        self.b2["font"] = ("Calibri", "9")
-        self.b2["width"] = 55
-        self.b2["command"] = self.converteParaCinza
-        self.b2.pack()
-
-        self.b3 = Button(self.widget1)
-        self.b3["text"] = "Converte para RGB"
-        self.b3["font"] = ("Calibri", "9")
-        self.b3["width"] = 55
-        self.b3["command"] = self.converteParaRgb
-        self.b3.pack()
-
         self.b4 = Button(self.widget1)
         self.b4["text"] = "Salvar"
         self.b4["font"] = ("Calibri", "9")
@@ -270,8 +256,12 @@ class Application:
         for c in range(
             nCanais
         ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-            for y in range(altura):  # Laço de posição altura y
-                for x in range(largura):  # Laço de posição altura x
+            for y in range(
+                altura
+            ):  # Laço de posição altura y - Laço que percorre todos os pixels no eixo y.
+                for x in range(
+                    largura
+                ):  # Laço de posição largura x -  Laço que percorre todos os pixels no eixo x.
                     cor = matA[c][y][x] - matB[c - 1][y - 1][x - 1]  # Realiza subtração
                     if cor < 0:  # Evita estouro para números negativos
                         cor = 0  # Seta zero caso seja um número negativo
@@ -319,8 +309,12 @@ class Application:
             for c in range(
                 nCanais
             ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-                for y in range(altura):  # Laço de posição altura y
-                    for x in range(largura):  # Laço de posição altura x
+                for y in range(
+                    altura
+                ):  # Laço de posição altura y - Laço que percorre todos os pixels no eixo y.
+                    for x in range(
+                        largura
+                    ):  # Laço de posição altura x - Laço que percorre todos os pixels no eixo x.
                         if (
                             matriz[c][y][x] < limiar
                         ):  # Verifica se o valor do Pixel no canal c, altura y, largura x é menor que o limiar.
@@ -378,8 +372,12 @@ class Application:
             for c in range(
                 nCanais
             ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-                for y in range(altura):  # Laço de posição altura y
-                    for x in range(largura):  # Laço de posição altura x
+                for y in range(
+                    altura
+                ):  # Laço de posição altura y -  Laço que percorre todos os pixels no eixo y.
+                    for x in range(
+                        largura
+                    ):  # Laço de posição largura x -  Laço que percorre todos os pixels no eixo x.
                         temp = matriz[c][y][x] + randrange(
                             -255, 255
                         )  # Soma o valor do Pixel no canal c, altura y, largura x
@@ -423,8 +421,12 @@ class Application:
         for c in range(
             nCanais
         ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-            for y in range(altura):  # Laço de posição altura y
-                for x in range(largura):  # Laço de posição altura x
+            for y in range(
+                altura
+            ):  # Laço de posição altura y - Laço que percorre todos os pixels no eixo y.
+                for x in range(
+                    largura
+                ):  # Laço de posição largura x -  Laço que percorre todos os pixels no eixo x.
                     color = int(
                         matriz[c][y][x] / faixa
                     )  # Valor do pixel é o valor atual dividido pelo valor da faixa
@@ -481,8 +483,12 @@ class Application:
             for c in range(
                 nCanais
             ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-                for y in range(altura):  # Laço de posição altura y
-                    for x in range(largura):  # Laço de posição altura x
+                for y in range(
+                    altura
+                ):  # Laço de posição altura y - Laço que percorre todos os pixels no eixo y.
+                    for x in range(
+                        largura
+                    ):  # Laço de posição largura x -  Laço que percorre todos os pixels no eixo x.
                         for d in range(
                             len(matrizDithering)
                         ):  # Laço que percorre o tamanho da matrizDithering
@@ -560,9 +566,13 @@ class Application:
             for c in range(
                 nCanais
             ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-                for y in range(altura):  # Laço de posição altura y
+                for y in range(
+                    altura
+                ):  # Laço de posição altura y - Laço que percorre todos os pixels no eixo y.
                     j = y % dimensao  # Resto da divisão inteira
-                    for x in range(largura):  # Laço de posição altura x
+                    for x in range(
+                        largura
+                    ):  # Laço de posição largura x -  Laço que percorre todos os pixels no eixo x.
                         i = x % dimensao  # Resto da divisão inteira
                         if (
                             matrizEntrada[c][y][x] > matrizDithering[i][j]
@@ -623,8 +633,12 @@ class Application:
             for c in range(
                 nCanais
             ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-                for x in range(largura - 1):
-                    for y in range(altura - 1):
+                for x in range(
+                    largura - 1
+                ):  # Laço que percorre todos os pixels no eixo x
+                    for y in range(
+                        altura - 1
+                    ):  # Laço que percorre todos os pixels no eixo y.
                         if (
                             matriz[c][y][x] < limiar
                         ):  # Verifica se o valor do Pixel no canal c, altura y, largura x é menor que o limiar.
@@ -651,15 +665,20 @@ class Application:
             self.msg["text"] = "Imagem"
 
     # Erosão - Remove pixels que não possuem o padrão do Elemento Estruturante
+    # Encolhe uma imagem. É expressa como a interseção da Imagem e Kernel.
+    # Se todos os elementos do Kernel estiverem na Imagem, o pixel central do
+    # Kernel é mantido na imagem de saída.
     def erosaoBin(self, bool=False):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            # Exemplo de Kernel em cruz
+            kernel = numpy.array(
                 [
-                    [255, 0, 0, 255, 0],
-                    [255, 0, 255, 0, 255],
-                    [0, 0, 255, 255, 0],
-                    [255, 0, 255, 0, 255],
-                    [255, 0, 0, 255, 0]
+                    [0, 0, 255, 0, 0],
+                    [0, 0, 255, 0, 0],
+                    [255, 255, 255, 255, 255],
+                    [0, 0, 255, 0, 0],
+                    [0, 0, 255, 0, 0],
                 ]
             )
             imagemEntrada = Imagem()  # Cria um objeto do tipo Imagem
@@ -678,29 +697,39 @@ class Application:
                 (nCanais, altura, largura)
             )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
             # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
-            raio = int((len(elementoEstruturante) - 1) / 2)
-            auxBool = False
+            raio = int((len(kernel) - 1) / 2)  # raio baseado no kernel
+            temPerfil = False
+            branco = 255  # 255 é o valor equivalente ao pixel branco
+            preto = 0  # 0 é o valor equivalente ao pixel preto
 
             # Laços que percorrem cada pixel
             for c in range(
                 nCanais
             ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-                for y in range(raio, altura - raio):
-                    for x in range(raio, largura - raio):
-                        for z in range(-raio, raio + 1):
-                            for w in range(-raio, raio + 1):
-                                if elementoEstruturante[z + raio][w + raio] == 255:
+                for y in range(
+                    raio, altura - raio
+                ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                    for x in range(
+                        raio, largura - raio
+                    ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel
+                        for dy in range(-raio, raio + 1):
+                            for dx in range(-raio, raio + 1):
+                                if (
+                                    kernel[dy + raio][dx + raio] == branco
+                                ):  # Verifica se o valor do pixel é 255.
                                     if (
-                                        matriz[c][y + z][x + w]
-                                        != elementoEstruturante[z + raio][w + raio]
+                                        matriz[c][y + dy][x + dx]
+                                        != kernel[dy + raio][dx + raio]
                                     ):
-                                        auxBool = False
+                                        temPerfil = False
 
-                        if auxBool == True:
-                            matrizSaida[c, y, x] = matriz[c][y][x]
+                        if temPerfil == False:
+                            matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
                         else:
-                            matrizSaida[c, y, x] = 0
-                        auxBool = True
+                            matrizSaida[c, y, x] = matriz[c][y][
+                                x
+                            ]  # Pixel da imagem de entrada não se altera
+                        temPerfil = True
 
             imagemSaida = Imagem()  # Cria um objeto do tipo Imagem
             imagemSaida._criarComMatriz(matrizSaida)
@@ -719,13 +748,15 @@ class Application:
     # Dilatação - Insere pixels no conjunto de pixels que possuem o padrão do Elemento Estruturante
     def dilatacaoBin(self, bool=False):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            # Exemplo de Kernel em cruz
+            kernel = numpy.array(
                 [
-                    [255, 0, 0, 255, 0],
-                    [255, 0, 255, 0, 255],
-                    [0, 0, 255, 255, 0],
-                    [255, 0, 255, 0, 255],
-                    [255, 0, 0, 255, 0]
+                    [0, 0, 255, 0, 0],
+                    [0, 0, 255, 0, 0],
+                    [255, 255, 255, 255, 255],
+                    [0, 0, 255, 0, 0],
+                    [0, 0, 255, 0, 0],
                 ]
             )
             imagemEntrada = Imagem()
@@ -744,33 +775,49 @@ class Application:
                 (nCanais, altura, largura)
             )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
             # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
-            raio = int((len(elementoEstruturante) - 1) / 2)
-            auxBool = False
+            raio = int((len(kernel) - 1) / 2)
+            temPerfil = False
+            branco = 255  # 255 é o valor equivalente ao pixel branco
+            preto = 0  # 0 é o valor equivalente ao pixel preto
 
-            for c in range(nCanais):
-                for y in range(raio, altura - raio):
-                    for x in range(raio, largura - raio):
+            for c in range(
+                nCanais
+            ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+                for y in range(
+                    raio, altura - raio
+                ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                    for x in range(
+                        raio, largura - raio
+                    ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel.
                         for z in range(-raio, raio + 1):
                             for w in range(-raio, raio + 1):
-                                if elementoEstruturante[z + raio][w + raio] == 255:
+                                if (
+                                    kernel[z + raio][w + raio] == branco
+                                ):  # Verifica se o valor do pixel é 255.
                                     if (
                                         matriz[c][y + z][x + w]
-                                        == elementoEstruturante[z + raio][w + raio]
+                                        == kernel[z + raio][w + raio]
                                     ):
-                                        auxBool = True
+                                        temPerfil = True
 
-                        if auxBool == True:
-                            matrizSaida[c, y, x] = 255
+                        if temPerfil == False:
+                            matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
                         else:
-                            matrizSaida[c, y, x] = 0
-                        auxBool = False
+                            matrizSaida[
+                                c, y, x
+                            ] = branco  # Seta o valor do pixel em 255.
+                        temPerfil = False
 
             imagem = Imagem()
             imagem._criarComMatriz(matrizSaida)
             if bool == True:
-                imagem.mostrar(janela, "Imagem Abertura")
+                imagem.mostrar(
+                    janela, "Imagem Abertura"
+                )  # Mostrar na tela a imagem tratada.
             else:
-                imagem.mostrar(janela, "Imagem Dilatação")
+                imagem.mostrar(
+                    janela, "Imagem Dilatação"
+                )  # Mostrar na tela a imagem tratada.
             return imagem
         else:
             self.msg["text"] = "Imagem"
@@ -783,7 +830,6 @@ class Application:
                 [255, 0, 255, 0, 255],
                 [0, 0, 255, 255, 0],
                 [255, 0, 255, 0, 255],
-                [255, 0, 0, 255, 0]
             ]
         )
         nCanais = imagemEntrada.getNCanais()  # Indice Canais 3 (RGB) ou 1 (CINZA)
@@ -799,26 +845,37 @@ class Application:
         )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
         # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
         raio = int((len(mat) - 1) / 2)
-        auxBool = False
+        temPerfil = False
+        branco = 255  # 255 é o valor equivalente ao pixel branco
+        preto = 0  # 0 é o valor equivalente ao pixel preto
 
         for c in range(nCanais):
-            for y in range(raio, altura - raio):
-                for x in range(raio, largura - raio):
-                    for z in range(-raio, raio + 1):
-                        for w in range(-raio, raio + 1):
-                            if mat[z + raio][w + raio] == 255:
-                                if matriz[c][y + z][x + w] != mat[z + raio][w + raio]:
-                                    auxBool = False
+            for y in range(
+                raio, altura - raio
+            ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                for x in range(
+                    raio, largura - raio
+                ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel.
+                    for dy in range(-raio, raio + 1):
+                        for dx in range(-raio, raio + 1):
+                            if (
+                                mat[dy + raio][dx + raio] == branco
+                            ):  # Verifica se o valor do pixel é 255.
+                                if (
+                                    matriz[c][y + dy][x + dx]
+                                    != mat[dy + raio][dx + raio]
+                                ):
+                                    temPerfil = False
 
-                    if auxBool == True:
-                        matrizSaida[c, y, x] = matriz[c][y][x]
+                    if temPerfil == False:
+                        matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
                     else:
-                        matrizSaida[c, y, x] = 0
-                    auxBool = True
+                        matrizSaida[c, y, x] = matriz[c][y][x]
+                    temPerfil = True
 
         imagem = Imagem()
         imagem._criarComMatriz(matrizSaida)
-        imagem.mostrar(janela, "Imagem Erosao")
+        imagem.mostrar(janela, "Imagem Erosao")  # Mostrar na tela a imagem tratada.
         return imagem
 
     # Dilatação - Insere pixels no conjunto de pixels que possuem o padrão do Elemento Estruturante
@@ -833,127 +890,182 @@ class Application:
         )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
         # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
         raio = int((len(mat) - 1) / 2)
-        auxBool = False
+        temPerfil = False
+        branco = 255  # 255 é o valor equivalente ao pixel branco
+        preto = 0  # 0 é o valor equivalente ao pixel preto
 
-        for c in range(nCanais):
-            for y in range(raio, altura - raio):
-                for x in range(raio, largura - raio):
-                    for z in range(-raio, raio + 1):
-                        for w in range(-raio, raio + 1):
-                            if mat[z + raio][w + raio] == 255:
-                                if matriz[c][y + z][x + w] == mat[z + raio][w + raio]:
-                                    auxBool = True
+        for c in range(
+            nCanais
+        ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
+            for y in range(
+                raio, altura - raio
+            ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                for x in range(
+                    raio, largura - raio
+                ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel.
+                    for dy in range(-raio, raio + 1):
+                        for dx in range(-raio, raio + 1):
+                            if (
+                                mat[dy + raio][dx + raio] == branco
+                            ):  # Verifica se o valor do pixel é 255.
+                                if (
+                                    matriz[c][y + dy][x + dx]
+                                    == mat[dy + raio][dx + raio]
+                                ):
+                                    temPerfil = True
 
-                    if auxBool == True:
-                        matrizSaida[c, y, x] = 255
+                    if temPerfil == False:
+                        matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
                     else:
-                        matrizSaida[c, y, x] = 0
-                    auxBool = False
+                        matrizSaida[c, y, x] = branco  # Seta o valor do pixel em 255.
+                    temPerfil = False
 
         imagem = Imagem()
         imagem._criarComMatriz(matrizSaida)
-        imagem.mostrar(janela, "Imagem Dilatação")
+        imagem.mostrar(janela, "Imagem Dilatação")  # Mostrar na tela a imagem tratada.
         return imagem
 
     # Abertura Binária =  erosão -> dilatação (Realiza um erosão depois uma dilatação)
+    # Abertura – suaviza o contorno de uma imagem.
+    # Quebra estreitos e elimina proeminências delgadas.
+    # É usada também para remover ruídos da imagem e abrir pequenos vazios ou espaços entre objetos próximos numa imagem .
+    # Dada por uma erosão seguida de uma dilatação com o mesmo elemento estruturante.
     def aberturaBin(self):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            # Kenel com valores mais aleatórios para contrastar a imagem
+            kernel = numpy.array(
                 [
                     [255, 0, 0, 255, 0],
                     [255, 0, 255, 0, 255],
                     [0, 0, 255, 255, 0],
                     [255, 0, 255, 0, 255],
-                    [255, 0, 0, 255, 0]
                 ]
             )
             imagemEntrada = Imagem()
             imagemEntrada.carregar("img/b.png")
-            return self.dilatacaoBinParam(
-                self.erosaoBinParam(imagemEntrada, elementoEstruturante),
-                elementoEstruturante,
-            )
+
+            erosao = self.erosaoBinParam(imagemEntrada, kernel)  # Realiza a erosão
+            abertura = self.dilatacaoBinParam(
+                erosao, kernel
+            )  # Realiza a dilatação da erosão com o mesmo Kernel
+
+            return abertura  # Retorna a abertura
+
         else:
             self.msg["text"] = "Imagem"
 
     # Fechamento Binário =  dilatação -> erosão (Realiza um dilatação depois uma erosão)
+    # Closing – Funde pequenos quebras e alargas golfos estreitos.
+    # Elimina pequenos orifícios. Irá preencher ou fechar os vazios.
+    # Estas operações remover pixels brancos com ruídos.
     def fechamentoBin(self):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            # Kenel com valores mais aleatórios para contrastar a imagem
+            kernel = numpy.array(
                 [
                     [255, 0, 0, 255, 0],
                     [255, 0, 255, 0, 255],
                     [0, 0, 255, 255, 0],
                     [255, 0, 255, 0, 255],
-                    [255, 0, 0, 255, 0]
                 ]
             )
             imagemEntrada = Imagem()
             imagemEntrada.carregar("img/b.png")
-            return self.erosaoBinParam(
-                self.dilatacaoBinParam(imagemEntrada, elementoEstruturante),
-                elementoEstruturante,
-            )
+
+            dilatacao = self.dilatacaoBinParam(
+                imagemEntrada, kernel
+            )  # Realiza a dilatação
+            fechamento = self.erosaoBinParam(
+                dilatacao, kernel
+            )  # Realiza a erosão da dilatação com o mesmo Kernel
+
+            return fechamento  # Retorna o fechamento
+
         else:
             self.msg["text"] = "Imagem"
 
+    # Borda Interna - (Imagem - erosão(Imagem))
+    # É a fronteira dada pela diferença entre a imagem original e sua erosão.
     def bordaInterna(self):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            # Exemplo de Kernel em cruz
+            kernel = numpy.array(
                 [
-                    [255, 0, 0, 255, 0],
-                    [255, 0, 255, 0, 255],
-                    [0, 0, 255, 255, 0],
-                    [255, 0, 255, 0, 255],
-                    [255, 0, 0, 255, 0]
+                    [0, 0, 255, 0, 0],
+                    [0, 0, 255, 0, 0],
+                    [255, 255, 255, 255, 255],
+                    [0, 0, 255, 0, 0],
+                    [0, 0, 255, 0, 0],
                 ]
             )
             imagemEntrada = Imagem()
             imagemEntrada.carregar("img/b.png")
             imagemSaida = Imagem()
+
+            erosao = self.erosaoBinParam(imagemEntrada, kernel)  # Realiza a erosao
+            subtracao = self.subtracao(
+                imagemEntrada, erosao
+            )  # Realiza a subtracao da imagem de entrada pela erosao.
+
             imagemSaida._criarComMatriz(
-                self.subtracao(
-                    imagemEntrada,
-                    self.erosaoBinParam(imagemEntrada, elementoEstruturante),
-                )
-            )
-            imagemSaida.mostrar(janela, "Borda Interna")
+                subtracao
+            )  # Gera Imagem de saída com borda externa.
+
+            imagemSaida.mostrar(
+                janela, "Borda Interna"
+            )  # Mostrar na tela a imagem tratada.
             return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
+    # Borda Externa - (dilatacao(Imagem) - Imagem)
+    # É a fronteira dada pela diferença entre a imagem original e sua dilatação.
     def bordaExterna(self):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            # Exemplo de Kernel em cruz
+            kernel = numpy.array(
                 [
-                    [255, 0, 0, 255, 0],
-                    [255, 0, 255, 0, 255],
-                    [0, 0, 255, 255, 0],
-                    [255, 0, 255, 0, 255],
-                    [255, 0, 0, 255, 0]
+                    [0, 0, 255, 0, 0],
+                    [0, 0, 255, 0, 0],
+                    [255, 255, 255, 255, 255],
+                    [0, 0, 255, 0, 0],
+                    [0, 0, 255, 0, 0],
                 ]
             )
             imagemEntrada = Imagem()
             imagemEntrada.carregar("img/b.png")
             imagemSaida = Imagem()
+
+            dilatacao = self.dilatacaoBinParam(
+                imagemEntrada, kernel
+            )  # Realiza a dilatação
+            subtracao = self.subtracao(
+                dilatacao, imagemEntrada
+            )  # Realiza a subtracao da dilatação pela imagem de entrada.
+
             imagemSaida._criarComMatriz(
-                self.subtracao(
-                    self.dilatacaoBinParam(imagemEntrada, elementoEstruturante),
-                    imagemEntrada,
-                )
-            )
-            imagemSaida.mostrar(janela, "Borda Externa")
+                subtracao
+            )  # Gera Imagem de saída com borda externa.
+            imagemSaida.mostrar(janela, "Borda Externa")  # Mostra a imagem na tela.
             return imagemSaida
         else:
             self.msg["text"] = "Imagem"
 
+    # 1. Posiciona-se a origem do elemento estruturante sobre o primeiro pixel da imagem que sofre erosão.
+    # 2. Calcula-se a diferença de cada par correspondente de valores de pixels do elemento estrutural e da imagem.
+    # 3. Acha-se o valor mínimo de todas essas diferenças, e armazena-se o pixel correspondente na imagem de saída para este valor.
+    # 4. Repete-se este processo para cada pixel da imagem que sofre erosão.
     def erosaoMon(self):
         if self.msg["text"] == "Imagem":
             matriz = numpy.array(
                 [
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
-                    [1, 1, 2, 1, 1],
+                    [1, 1, 16, 1, 1],
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
                 ]
@@ -978,44 +1090,53 @@ class Application:
             )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
             # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
             raio = int((len(matriz) - 1) / 2)
-            min = 800000000000000000
+            valorMinimo = 800000000000000000
+            preto = 0  # 0 é o valor equivalente ao pixel preto
 
             # Laços que percorrem cada pixel
             for c in range(
                 nCanais
             ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-                for y in range((raio), (altura - raio)):
-                    for x in range((raio), (largura - raio)):
-                        for z in range((-raio), (raio + 1)):
-                            for w in range((-raio), (raio + 1)):
+                for y in range(
+                    (raio), (altura - raio)
+                ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                    for x in range(
+                        (raio), (largura - raio)
+                    ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel.
+                        for dy in range((-raio), (raio + 1)):
+                            for dx in range((-raio), (raio + 1)):
                                 if (
-                                    min
-                                    > matrizEntrada[c][y + z][x + w]
-                                    + matriz[(z + raio)][(w + raio)]
+                                    valorMinimo
+                                    > matrizEntrada[c][y + dy][x + dx]
+                                    + matriz[(dy + raio)][(dx + raio)]
                                 ):
-                                    min = (
-                                        matrizEntrada[c][y + z][x + w]
-                                        + matriz[(z + raio)][(w + raio)]
+                                    valorMinimo = (
+                                        matrizEntrada[c][y + dy][x + dx]
+                                        + matriz[(dy + raio)][(dx + raio)]
                                     )
-                        if min > 0:
-                            matrizSaida[c, y, x] = min
+                        if valorMinimo > preto:
+                            matrizSaida[c, y, x] = valorMinimo
                         else:
-                            matrizSaida[c, y, x] = 0
-                        min = 800000000000000000
+                            matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
+                        valorMinimo = 800000000000000000
             imagem = Imagem()  # Cria um objeto do tipo Imagem
-            imagem.criarComMatriz(matrizSaida)
+            imagem.criarComMatriz(matrizSaida)  # Gera imagem de saída.
             imagem.mostrar(janela, "Erosão Mon")  # Mostrar na tela a imagem tratada.
             return imagem.criarComMatriz(matrizSaida)
         else:
             self.msg["text"] = "Imagem"
 
+    # 1. Posiciona-se a origem do elemento estrutural sobre o primeiro pixel da imagem a ser dilatada.
+    # 2. Calcula-se a soma de cada par correspondente de valores de pixels do elemento estrutural e da imagem.
+    # 3. Acha-se o valor máximo de todas essas somas, e armazena-se o pixel correspondente na imagem de saída para este valor.
+    # 4. Repete-se este processo para cada pixel da imagem a ser dilatada.
     def dilatacaoMon(self):
         if self.msg["text"] == "Imagem":
             matriz = numpy.array(
                 [
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
-                    [1, 1, 2, 1, 1],
+                    [1, 1, 16, 1, 1],
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
                 ]
@@ -1040,39 +1161,44 @@ class Application:
             )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
             # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
             raio = int((len(matriz) - 1) / 2)
-            max = -800000000000000000
+            valorMaximo = -800000000000000000
+            preto = 0  # 0 é o valor equivalente ao pixel preto
 
             # Laços que percorrem cada pixel
             for c in range(
                 nCanais
             ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-                for y in range(raio, altura - raio):
-                    for x in range(raio, largura - raio):
-                        for z in range(-raio, raio + 1):
-                            for w in range(-raio, raio + 1):
+                for y in range(
+                    raio, altura - raio
+                ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                    for x in range(
+                        raio, largura - raio
+                    ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel.
+                        for dy in range(-raio, raio + 1):
+                            for dx in range(-raio, raio + 1):
                                 if (
-                                    max
-                                    < matrizEntrada[c][y + z][x + w]
-                                    + matriz[z + raio][w + raio]
+                                    valorMaximo
+                                    < matrizEntrada[c][y + dy][x + dx]
+                                    + matriz[dy + raio][dx + raio]
                                 ):
-                                    max = (
-                                        matrizEntrada[c][y + z][x + w]
-                                        + matriz[z + raio][w + raio]
+                                    valorMaximo = (
+                                        matrizEntrada[c][y + dy][x + dx]
+                                        + matriz[dy + raio][dx + raio]
                                     )
-                        if max > 0:
-                            matrizSaida[c, y, x] = max
+                        if valorMaximo > preto:
+                            matrizSaida[c, y, x] = valorMaximo
                         else:
-                            matrizSaida[c, y, x] = 0
-                        max = -800000000000000000
+                            matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
+                        valorMaximo = -800000000000000000
             imagem = Imagem()  # Cria um objeto do tipo Imagem
-            imagem.criarComMatriz(matrizSaida)
+            imagem.criarComMatriz(matrizSaida)  # Gera imagem de saída.
             imagem.mostrar(janela, "Dilatação Mon")  # Mostrar na tela a imagem tratada.
             return imagem.criarComMatriz(matrizSaida)
         else:
             self.msg["text"] = "Imagem"
 
     # Método erosao que aceita uma imagem de entrada como parâmetro
-    def erosaoMonParam(self, imagemEntrada: Imagem, elementoEstruturante):
+    def erosaoMonParam(self, imagemEntrada: Imagem, kernel):
         nCanais = imagemEntrada.getNCanais()  # Indice Canais 3 (RGB) ou 1 (CINZA)
         altura = imagemEntrada.getAltura()  # Numero correspondente a Altura da Imagem
         largura = (
@@ -1085,40 +1211,45 @@ class Application:
             (nCanais, altura, largura)
         )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
         # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
-        raio = int((len(elementoEstruturante) - 1) / 2)
-        min = 800000000000000000
+        raio = int((len(kernel) - 1) / 2)
+        valorMinimo = 800000000000000000
+        preto = 0  # 0 é o valor equivalente ao pixel preto
 
         # Laços que percorrem cada pixel
         for c in range(
             nCanais
         ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-            for y in range((raio), (altura - raio)):
-                for x in range((raio), (largura - raio)):
-                    for z in range((-raio), (raio + 1)):
-                        for w in range((-raio), (raio + 1)):
+            for y in range(
+                (raio), (altura - raio)
+            ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                for x in range(
+                    (raio), (largura - raio)
+                ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel.
+                    for dy in range((-raio), (raio + 1)):
+                        for dx in range((-raio), (raio + 1)):
                             if (
-                                min
-                                > matrizEntrada[c][y + z][x + w]
-                                + elementoEstruturante[(z + raio)][(w + raio)]
+                                valorMinimo
+                                > matrizEntrada[c][y + dy][x + dx]
+                                + kernel[(dy + raio)][(dx + raio)]
                             ):
-                                min = (
-                                    matrizEntrada[c][y + z][x + w]
-                                    + elementoEstruturante[(z + raio)][(w + raio)]
+                                valorMinimo = (
+                                    matrizEntrada[c][y + dy][x + dx]
+                                    + kernel[(dy + raio)][(dx + raio)]
                                 )
 
-                    if min > 0:
-                        matrizSaida[c, y, x] = min
+                    if valorMinimo > preto:
+                        matrizSaida[c, y, x] = valorMinimo
                     else:
-                        matrizSaida[c, y, x] = 0
+                        matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
 
-                    min = 800000000000000000
+                    valorMinimo = 800000000000000000
 
         imagem = Imagem()  # Cria um objeto do tipo Imagem
-        imagem.criarComMatriz(matrizSaida)
+        imagem.criarComMatriz(matrizSaida)  # Gera imagem de saída.
         return imagem
 
     # Método dilatacao que aceita uma imagem de entrada como parâmetro
-    def dilatacaoMonParam(self, imagemEntrada: Imagem, elementoEstruturante):
+    def dilatacaoMonParam(self, imagemEntrada: Imagem, kernel):
         nCanais = imagemEntrada.getNCanais()  # Indice Canais 3 (RGB) ou 1 (CINZA)
         altura = imagemEntrada.getAltura()  # Numero correspondente a Altura da Imagem
         largura = (
@@ -1131,39 +1262,44 @@ class Application:
             (nCanais, altura, largura)
         )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
         # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
-        raio = int((len(elementoEstruturante) - 1) / 2)
-        max = -800000000000000000
+        raio = int((len(kernel) - 1) / 2)
+        valorMaximo = -800000000000000000
+        preto = 0  # 0 é o valor equivalente ao pixel preto
 
         # Laços que percorrem cada pixel
         for c in range(
             nCanais
         ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-            for y in range(raio, altura - raio):
-                for x in range(raio, largura - raio):
-                    for z in range(-raio, raio + 1):
-                        for w in range(-raio, raio + 1):
+            for y in range(
+                raio, altura - raio
+            ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                for x in range(
+                    raio, largura - raio
+                ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel.
+                    for dy in range(-raio, raio + 1):
+                        for dx in range(-raio, raio + 1):
                             if (
-                                max
-                                < matrizEntrada[c][y + z][x + w]
-                                + elementoEstruturante[z + raio][w + raio]
+                                valorMaximo
+                                < matrizEntrada[c][y + dy][x + dx]
+                                + kernel[dy + raio][dx + raio]
                             ):
-                                max = (
-                                    matrizEntrada[c][y + z][x + w]
-                                    + elementoEstruturante[z + raio][w + raio]
+                                valorMaximo = (
+                                    matrizEntrada[c][y + dy][x + dx]
+                                    + kernel[dy + raio][dx + raio]
                                 )
-                    if max > 0:
-                        matrizSaida[c, y, x] = max
+                    if valorMaximo > preto:
+                        matrizSaida[c, y, x] = valorMaximo
                     else:
-                        matrizSaida[c, y, x] = 0
-                    max = -800000000000000000
+                        matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
+                    valorMaximo = -800000000000000000
 
         imagem = Imagem()  # Cria um objeto do tipo Imagem
-        imagem.criarComMatriz(matrizSaida)
+        imagem.criarComMatriz(matrizSaida)  # Gera imagem de saída.
         return imagem
 
     # Método erosão que aceita uma imagem de entrada como parâmetro
     # E é utilizado no método de fechamento
-    def erosaoMonFechamento(self, imagemEntrada: Imagem, elementoEstruturante):
+    def erosaoMonFechamento(self, imagemEntrada: Imagem, kernel):
         nCanais = imagemEntrada.getNCanais()  # Indice Canais 3 (RGB) ou 1 (CINZA)
         altura = imagemEntrada.getAltura()  # Numero correspondente a Altura da Imagem
         largura = (
@@ -1176,39 +1312,44 @@ class Application:
             (nCanais, altura, largura)
         )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
         # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
-        raio = int((len(elementoEstruturante) - 1) / 2)
-        min = 800000000000000000
+        raio = int((len(kernel) - 1) / 2)
+        valorMinimo = 800000000000000000
+        preto = 0  # 0 é o valor equivalente ao pixel preto
 
         # Laços que percorrem cada pixel
         for c in range(
             nCanais
         ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-            for y in range((raio), (altura - raio)):
-                for x in range((raio), (largura - raio)):
-                    for z in range((-raio), (raio + 1)):
-                        for w in range((-raio), (raio + 1)):
+            for y in range(
+                (raio), (altura - raio)
+            ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                for x in range(
+                    (raio), (largura - raio)
+                ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel.
+                    for dy in range((-raio), (raio + 1)):
+                        for dx in range((-raio), (raio + 1)):
                             if (
-                                min
-                                > matrizEntrada[c][y + z][x + w]
-                                + elementoEstruturante[(z + raio)][(w + raio)]
+                                valorMinimo
+                                > matrizEntrada[c][y + dy][x + dx]
+                                + kernel[(dy + raio)][(dx + raio)]
                             ):
-                                min = (
-                                    matrizEntrada[c][y + z][x + w]
-                                    + elementoEstruturante[(z + raio)][(w + raio)]
+                                valorMinimo = (
+                                    matrizEntrada[c][y + dy][x + dx]
+                                    + kernel[(dy + raio)][(dx + raio)]
                                 )
-                    if min > 0:
-                        matrizSaida[c, y, x] = min
+                    if valorMinimo > preto:
+                        matrizSaida[c, y, x] = valorMinimo
                     else:
-                        matrizSaida[c, y, x] = 0
-                    min = 800000000000000000
+                        matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
+                    valorMinimo = 800000000000000000
         imagem = Imagem()  # Cria um objeto do tipo Imagem
-        imagem.criarComMatriz(matrizSaida)
+        imagem.criarComMatriz(matrizSaida)  # Gera imagem de saída.
         imagem.mostrar(janela, "Fechamento Mon")  # Mostrar na tela a imagem tratada.
         return imagem.criarComMatriz(matrizSaida)
 
     # Método dilatacao que aceita uma imagem de entrada como parâmetro
     # E é utilizado no método de abertura
-    def dilatacaoMonAbertura(self, imagemEntrada: Imagem, elementoEstruturante):
+    def dilatacaoMonAbertura(self, imagemEntrada: Imagem, kernel):
         nCanais = imagemEntrada.getNCanais()  # Indice Canais 3 (RGB) ou 1 (CINZA)
         altura = imagemEntrada.getAltura()  # Numero correspondente a Altura da Imagem
         largura = (
@@ -1221,43 +1362,52 @@ class Application:
             (nCanais, altura, largura)
         )  # Gera uma matriz de saida zerada com a mesma quantidade de canais, altura e largura.
         # Ex: np.zeros(5) array([ 0.,  0.,  0.,  0.,  0.])
-        raio = int((len(elementoEstruturante) - 1) / 2)
-        max = -800000000000000000
+        raio = int((len(kernel) - 1) / 2)
+        valorMaximo = -800000000000000000
+        preto = 0  # 0 é o valor equivalente ao pixel preto
 
         # Laços que percorrem cada pixel
         for c in range(
             nCanais
         ):  # Laço que percorre todos os canais (3 se RGB, 1 se cinza)
-            for y in range(raio, altura - raio):
-                for x in range(raio, largura - raio):
-                    for z in range(-raio, raio + 1):
-                        for w in range(-raio, raio + 1):
+            for y in range(
+                raio, altura - raio
+            ):  # Laço que percorre todos os pixels no eixo y até o limiar do raio do kernel
+                for x in range(
+                    raio, largura - raio
+                ):  # Laço que percorre todos os pixels no eixo x até o limiar do raio do kernel.
+                    for dy in range(-raio, raio + 1):
+                        for dx in range(-raio, raio + 1):
                             if (
-                                max
-                                < matrizEntrada[c][y + z][x + w]
-                                + elementoEstruturante[z + raio][w + raio]
+                                valorMaximo
+                                < matrizEntrada[c][y + dy][x + dx]
+                                + kernel[dy + raio][dx + raio]
                             ):
-                                max = (
-                                    matrizEntrada[c][y + z][x + w]
-                                    + elementoEstruturante[z + raio][w + raio]
+                                valorMaximo = (
+                                    matrizEntrada[c][y + dy][x + dx]
+                                    + kernel[dy + raio][dx + raio]
                                 )
-                    if max > 0:
-                        matrizSaida[c, y, x] = max
+                    if valorMaximo > preto:
+                        matrizSaida[c, y, x] = valorMaximo
                     else:
-                        matrizSaida[c, y, x] = 0
-                    max = -800000000000000000
+                        matrizSaida[c, y, x] = preto  # Seta o valor do pixel em 0.
+                    valorMaximo = -800000000000000000
         imagem = Imagem()  # Cria um objeto do tipo Imagem
-        imagem.criarComMatriz(matrizSaida)
+        imagem.criarComMatriz(matrizSaida)  # Gera imagem de saída.
         imagem.mostrar(janela, "Abertura Mon")  # Mostrar na tela a imagem tratada.
 
     # Abertura Monocromática =  erosão -> dilatação (Realiza um erosão depois uma dilatação)
+    # A abertura em tons de cinza funciona como a abertura binária combinando as duas operações de erosão e dilatação em seqüência.
+    # A diferença é que a propriedade da idempotência não se aplica:
+    # várias aberturas seguidas produzem um resultado mais acentuado do que uma única abertura.
     def aberturaMon(self):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            kernel = numpy.array(
                 [
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
-                    [1, 1, 2, 1, 1],
+                    [1, 1, 16, 1, 1],
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
                 ]
@@ -1266,28 +1416,35 @@ class Application:
             imagemEntrada.carregar(
                 "img/lennaCinza.jpg"
             )  # Carrega a imagem do diretório
-            return self.dilatacaoMonAbertura(
-                self.erosaoMonParam(imagemEntrada, elementoEstruturante),
-                elementoEstruturante,
-            )
+
+            erosao = self.erosaoMonParam(imagemEntrada, kernel)  # Realiza a erosão
+            abertura = self.dilatacaoMonAbertura(
+                erosao, kernel
+            )  # Realiza a dilatação da erosão com o mesmo Kernel
+
+            return abertura  # Retorna a abertura
         else:
             self.msg["text"] = "Imagem"
 
     # Método abertura que aceita uma imagem de entrada como parâmetro
-    def aberturaMonParam(self, imagemEntrada: Imagem, elementoEstruturante):
+    def aberturaMonParam(self, imagemEntrada: Imagem, kernel):
         return self.dilatacaoMonAbertura(
-            self.erosaoMonParam(imagemEntrada, elementoEstruturante),
-            elementoEstruturante,
+            self.erosaoMonParam(imagemEntrada, kernel),
+            kernel,
         )
 
     # Fechamento Monocromático =  dilatação -> erosão (Realiza um dilatação depois uma erosão)
+    # O fechamento em tons de cinza funciona como o fechamento binário combinando as duas operações de dilatação e erosão em seqüência.
+    # A diferença é que a propriedade da idempotência não se aplica:
+    # Vários fechamentos seguidos produzem uum resultado mais acentuado do que um único fechamento.
     def fechamentoMon(self):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            kernel = numpy.array(
                 [
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
-                    [1, 1, 2, 1, 1],
+                    [1, 1, 16, 1, 1],
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
                 ]
@@ -1296,18 +1453,23 @@ class Application:
             imagemEntrada.carregar(
                 "img/lennaCinza.jpg"
             )  # Carrega a imagem do diretório
-            return self.erosaoMonFechamento(
-                self.dilatacaoMonParam(imagemEntrada, elementoEstruturante),
-                elementoEstruturante,
-            )
+
+            dilatacao = self.dilatacaoMonParam(
+                imagemEntrada, kernel
+            )  # Realiza a dilatação
+            fechamento = self.erosaoMonFechamento(
+                dilatacao, kernel
+            )  # Realiza a erosão da dilatação com o mesmo Kernel
+
+            return fechamento  # Retorna o fechamento
         else:
             self.msg["text"] = "Imagem"
 
     # Método fechamento que aceita uma imagem de entrada como parâmetro
-    def fechamentoMonParam(self, imagemEntrada: Imagem, elementoEstruturante):
+    def fechamentoMonParam(self, imagemEntrada: Imagem, kernel):
         return self.erosaoMonFechamento(
-            self.dilatacaoMonParam(imagemEntrada, elementoEstruturante),
-            elementoEstruturante,
+            self.dilatacaoMonParam(imagemEntrada, kernel),
+            kernel,
         )
 
     def subtracaoMon(self, imgA: Imagem, imgB: Imagem):
@@ -1336,18 +1498,23 @@ class Application:
                     ] = cor  # Seta resultado da subtração no pixel atual.
 
         imagem = Imagem()  # Cria um objeto do tipo Imagem
-        imagem.criarComMatriz(matrizSaida)
+        imagem.criarComMatriz(matrizSaida)  # Gera imagem de saída.
         imagem.mostrar(janela, "Subtração")  # Mostrar na tela a imagem tratada.
         return imagem.criarComMatriz(matrizSaida)
 
     # Gradiente = Dilatação - erosão (O resultado é a subtração da dilatação pela erosão)
+    # Outra forma de encontrar a borda.
+    # Composta de três outras operações básicas: Dilatação, erosão e a subtração.
+    # A imagem é dilatada e erodida pelo mesmo kernel e o resultado erodido é subtraído do resultado dilatado.
+    # Resulta em uma borda maior e mais confiável.
     def gradiente(self):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            kernel = numpy.array(
                 [
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
-                    [1, 1, 2, 1, 1],
+                    [1, 1, 62, 1, 1],
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
                 ]
@@ -1357,12 +1524,16 @@ class Application:
                 "img/lennaCinza.jpg"
             )  # Carrega a imagem do diretório
             imagem = Imagem()  # Cria um objeto do tipo Imagem
-            imagem.criarComMatriz(
-                self.subtracaoMon(
-                    self.dilatacaoMonParam(imagemEntrada, elementoEstruturante),
-                    self.erosaoMonParam(imagemEntrada, elementoEstruturante),
-                )
-            )
+
+            dilatacao = self.dilatacaoMonParam(
+                imagemEntrada, kernel
+            )  # Realiza a dilatacao
+            erosao = self.erosaoMonParam(imagemEntrada, kernel)  # Realiza a erosão
+            subtracao = self.subtracaoMon(
+                dilatacao, erosao
+            )  # Realiza a subtracao da dilatação pela erosão
+            imagem.criarComMatriz(subtracao)  # Cria a imagem de saída
+
             return imagem.mostrar(
                 janela, "Gradiente"
             )  # Mostrar na tela a imagem tratada.
@@ -1372,11 +1543,12 @@ class Application:
     # Smoothing - abertura -> fechamento (Realiza uma abertura depois um fechamento)
     def smoothing(self):
         if self.msg["text"] == "Imagem":
-            elementoEstruturante = numpy.array(
+            # Conjunto de pixels chamado de elemento estruturante (EE) ou kernel
+            kernel = numpy.array(
                 [
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
-                    [1, 1, 2, 1, 1],
+                    [1, 1, 16, 1, 1],
                     [1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1],
                 ]
@@ -1385,10 +1557,15 @@ class Application:
             imagemEntrada.carregar(
                 "img/lennaCinza.jpg"
             )  # Carrega a imagem do diretório
-            return self.fechamentoMonParam(
-                self.aberturaMonParam(imagemEntrada, elementoEstruturante),
-                elementoEstruturante,
-            )
+
+            abertura = self.aberturaMonParam(
+                imagemEntrada, kernel
+            )  # Realiza a abertura
+            smoothing = self.fechamentoMonParam(
+                abertura, kernel
+            )  # Realiza o fechamento da abertura com o mesmo Kernel
+
+            return smoothing  # Retorna a imagem com o efeito de smoothing
         else:
             self.msg["text"] = "Imagem"
 
